@@ -1,0 +1,9 @@
+{
+  "lang": "GER",
+  "nav": { "home": "Start", "division": "Abteilung", "department": "Fachbereich", "project": "Projekt", "product": "Produkt" },
+  "home": { "title": "Index Web", "subtitle": "Verwaltungspanel", "division": "Abteilung", "division_desc": "Verwalten Sie Unternehmensbereiche", "department": "Fachbereich", "department_desc": "Verwalten Sie Fachbereiche", "project": "Projekt", "project_desc": "Steuern Sie aktive Projekte", "product": "Produkt", "product_desc": "Vollständiger Produktkatalog" },
+  "table": { "loading": "Laden...", "error": "Fehler", "title_division": "Abteilungen", "title_department": "Fachbereiche", "title_project": "Projekte", "title_product": "Produkte", "col_name": "Name", "col_division": "Abteilung", "col_department": "Fachbereich", "col_version": "Version", "col_date": "Datum", "col_time": "Uhrzeit", "col_description": "Beschreibung", "col_project": "Projekt", "selected": "ausgewählt" },
+  "action": { "edit": "Bearbeiten", "delete": "Löschen", "cancel": "Abbrechen", "save": "Speichern", "confirm_delete": "{{name}} löschen?", "confirm_delete_selected": "{{count}} Elemente löschen?", "deleted": "Erfolgreich gelöscht", "saved": "Erfolgreich gespeichert", "error": "Fehler beim Speichern", "delete_selected": "Ausgewählte löschen" },
+  "notFound": { "title": "404", "message": "Seite nicht gefunden", "back": "Zurück zum Start" },
+  "edit": { "title_division": "Abteilung bearbeiten", "title_department": "Fachbereich bearbeiten", "title_project": "Projekt bearbeiten", "title_product": "Produkt bearbeiten", "title_create_division": "Neue Abteilung", "title_create_department": "Neuer Fachbereich", "title_create_project": "Neues Projekt", "title_create_product": "Neues Produkt", "name": "Name", "division": "Abteilung", "department": "Fachbereich", "project": "Projekt", "version": "Version", "publishDate": "Veröffentlichungsdatum", "description": "Beschreibung" }
+}

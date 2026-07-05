@@ -1,0 +1,9 @@
+{
+  "lang": "EUS",
+  "nav": { "home": "Hasiera", "division": "Dibisioa", "department": "Saila", "project": "Proiektua", "product": "Produktua" },
+  "home": { "title": "Index Web", "subtitle": "Administrazioa panela", "division": "Dibisioa", "division_desc": "Kudeatu erakundearen dibisioak", "department": "Saila", "department_desc": "Kudeatu sailak", "project": "Proiektua", "project_desc": "Kontrolatu proiektu aktiboak", "product": "Produktua", "product_desc": "Produktu katalogo osoa" },
+  "table": { "loading": "Kargatzen...", "error": "Errorea", "title_division": "Dibisioak", "title_department": "Sailak", "title_project": "Proiektuak", "title_product": "Produktuak", "col_name": "Izena", "col_division": "Dibisioa", "col_department": "Saila", "col_version": "Bertsioa", "col_date": "Data", "col_time": "Ordua", "col_description": "Deskribapena", "col_project": "Proiektua", "selected": "hautatuak" },
+  "action": { "edit": "Editatu", "delete": "Ezabatu", "cancel": "Utzi", "save": "Gorde", "confirm_delete": "{{name}} ezabatu?", "confirm_delete_selected": "{{count}} elementu ezabatu?", "deleted": "Ondo ezabatuta", "saved": "Ondo gordeta", "error": "Errorea gordetzean", "delete_selected": "Ezabatu hautatuak" },
+  "notFound": { "title": "404", "message": "Orria ez da aurkitu", "back": "Itzuli hasierara" },
+  "edit": { "title_division": "Dibisioa Editatu", "title_department": "Saila Editatu", "title_project": "Proiektua Editatu", "title_product": "Produktua Editatu", "title_create_division": "Dibisio Berria", "title_create_department": "Sail Berria", "title_create_project": "Proiektu Berria", "title_create_product": "Produktu Berria", "name": "Izena", "division": "Dibisioa", "department": "Saila", "project": "Proiektua", "version": "Bertsioa", "publishDate": "Argitaratze data", "description": "Deskribapena" }
+}

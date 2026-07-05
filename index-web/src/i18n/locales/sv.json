@@ -1,0 +1,9 @@
+{
+  "lang": "SVE",
+  "nav": { "home": "Hem", "division": "Division", "department": "Avdelning", "project": "Projekt", "product": "Produkt" },
+  "home": { "title": "Index Web", "subtitle": "Administrationspanel", "division": "Division", "division_desc": "Hantera organisationsdivisioner", "department": "Avdelning", "department_desc": "Hantera avdelningar", "project": "Projekt", "project_desc": "Kontrollera aktiva projekt", "product": "Produkt", "product_desc": "Fullständig produktkatalog" },
+  "table": { "loading": "Laddar...", "error": "Fel", "title_division": "Divisioner", "title_department": "Avdelningar", "title_project": "Projekt", "title_product": "Produkter", "col_name": "Namn", "col_division": "Division", "col_department": "Avdelning", "col_version": "Version", "col_date": "Datum", "col_time": "Tid", "col_description": "Beskrivning", "col_project": "Projekt", "selected": "valda" },
+  "action": { "edit": "Redigera", "delete": "Ta bort", "cancel": "Avbryt", "save": "Spara", "confirm_delete": "Ta bort {{name}}?", "confirm_delete_selected": "Ta bort {{count}} objekt?", "deleted": "Borttaget", "saved": "Sparat", "error": "Fel vid sparande", "delete_selected": "Ta bort valda" },
+  "notFound": { "title": "404", "message": "Sidan hittades inte", "back": "Tillbaka till hem" },
+  "edit": { "title_division": "Redigera Division", "title_department": "Redigera Avdelning", "title_project": "Redigera Projekt", "title_product": "Redigera Produkt", "title_create_division": "Ny Division", "title_create_department": "Ny Avdelning", "title_create_project": "Nytt Projekt", "title_create_product": "Ny Produkt", "name": "Namn", "division": "Division", "department": "Avdelning", "project": "Projekt", "version": "Version", "publishDate": "Publiceringsdatum", "description": "Beskrivning" }
+}
