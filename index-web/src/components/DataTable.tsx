@@ -4,6 +4,7 @@ import ContextMenu from './ContextMenu.tsx'
 type Column<T> = {
   key: keyof T
   header: string
+  sortValue?: (row: T) => string
 }
 
 type DataTableProps<T> = {
@@ -12,6 +13,7 @@ type DataTableProps<T> = {
   title: string
   onEdit?: (index: number) => void
   onDelete?: (index: number) => void
+  onHeaderContext?: (key: keyof T, e: React.MouseEvent) => void
   selectable?: boolean
   selectedIndices?: Set<number>
   onSelectionChange?: (indices: Set<number>) => void
@@ -23,11 +25,34 @@ function DataTable<T>({
   title,
   onEdit,
   onDelete,
+  onHeaderContext,
   selectable,
   selectedIndices,
   onSelectionChange,
 }: DataTableProps<T>) {
   const [menu, setMenu] = useState<{ x: number; y: number; index: number } | null>(null)
+  const [sortKey, setSortKey] = useState<keyof T | null>(null)
+  const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc')
+
+  function handleSort(key: keyof T) {
+    if (sortKey === key) {
+      setSortDir(sortDir === 'asc' ? 'desc' : 'asc')
+    } else {
+      setSortKey(key)
+      setSortDir('asc')
+    }
+  }
+
+  const col = columns.find((c) => c.key === sortKey)
+  const sorted = data
+    .map((item, index) => ({ item, index }))
+    .sort((a, b) => {
+      if (!sortKey || !col) return 0
+      const va = col.sortValue ? col.sortValue(a.item) : String(a.item[sortKey] ?? '')
+      const vb = col.sortValue ? col.sortValue(b.item) : String(b.item[sortKey] ?? '')
+      const cmp = va.localeCompare(vb)
+      return sortDir === 'asc' ? cmp : -cmp
+    })
 
   function handleContext(e: React.MouseEvent, index: number) {
     if (!onEdit && !onDelete) return
@@ -72,19 +97,27 @@ function DataTable<T>({
                 </th>
               )}
               {columns.map((col) => (
-                <th key={String(col.key)} className="px-4 py-3 font-medium">
+                <th
+                  key={String(col.key)}
+                  onClick={() => handleSort(col.key)}
+                  onContextMenu={(e) => onHeaderContext?.(col.key, e)}
+                  className="cursor-pointer select-none px-4 py-3 font-medium transition-colors hover:text-white"
+                >
                   {col.header}
+                  {sortKey === col.key && (
+                    <span className="ml-1 inline-block">{sortDir === 'asc' ? '\u25B2' : '\u25BC'}</span>
+                  )}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {data.map((row, i) => (
+            {sorted.map(({ item, index }) => (
               <tr
-                key={i}
-                onContextMenu={(e) => handleContext(e, i)}
+                key={index}
+                onContextMenu={(e) => handleContext(e, index)}
                 className={`border-b border-gray-700 transition-colors ${
-                  selectedIndices?.has(i)
+                  selectedIndices?.has(index)
                     ? 'bg-indigo-900/30 hover:bg-indigo-900/40'
                     : 'hover:bg-gray-700'
                 }`}
@@ -93,15 +126,15 @@ function DataTable<T>({
                   <td className="w-10 px-4 py-3">
                     <input
                       type="checkbox"
-                      checked={selectedIndices?.has(i) ?? false}
-                      onChange={() => toggleIndex(i)}
+                      checked={selectedIndices?.has(index) ?? false}
+                      onChange={() => toggleIndex(index)}
                       className="h-4 w-4 rounded border-gray-600 bg-gray-700 accent-indigo-500"
                     />
                   </td>
                 )}
                 {columns.map((col) => (
                   <td key={String(col.key)} className="px-4 py-3">
-                    {String(row[col.key] ?? '')}
+                    {String(item[col.key] ?? '')}
                   </td>
                 ))}
               </tr>

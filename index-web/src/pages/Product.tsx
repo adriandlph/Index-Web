@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
 import type { ProductResponse, ProjectResponse, ProductRow } from '../types.ts'
@@ -16,8 +16,8 @@ import Tooltip from '../components/Tooltip.tsx'
 const columns = (t: TFunction) => [
   { key: 'name' as const, header: t('table.col_name') },
   { key: 'version' as const, header: t('table.col_version') },
-  { key: 'date' as const, header: t('table.col_date') },
-  { key: 'time' as const, header: t('table.col_time') },
+  { key: 'date' as const, header: t('table.col_date'), sortValue: (r: ProductRow) => `${r.date}T${r.time}` },
+  { key: 'time' as const, header: t('table.col_time'), sortValue: (r: ProductRow) => `${r.date}T${r.time}` },
   { key: 'description' as const, header: t('table.col_description') },
   { key: 'project' as const, header: t('table.col_project') },
 ]
@@ -25,7 +25,6 @@ const columns = (t: TFunction) => [
 function Product() {
   const { t } = useTranslation()
   const [data, setData] = useState<ProductResponse[]>([])
-  const [rows, setRows] = useState<ProductRow[]>([])
   const [projects, setProjects] = useState<ProjectResponse[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -36,6 +35,27 @@ function Product() {
   const [notifType, setNotifType] = useState<'success' | 'error'>('success')
   const [deleteIndex, setDeleteIndex] = useState<number | null>(null)
   const [bulkDelete, setBulkDelete] = useState(false)
+  const [dateFormat, setDateFormat] = useState<'DD-MM-YYYY' | 'YYYY-MM-DD'>('DD-MM-YYYY')
+
+  const rows = useMemo(() => {
+    const projMap = new Map(projects.map((p) => [p.id, p.name]))
+    return data.map((p) => {
+      const [rawDate, rawTime] = p.publishDate.includes('T')
+        ? p.publishDate.split('T')
+        : [p.publishDate, '']
+      const date = dateFormat === 'DD-MM-YYYY' && rawDate
+        ? rawDate.split('-').reverse().join('-')
+        : rawDate
+      return {
+        name: p.name,
+        version: p.version,
+        date,
+        time: rawTime ? rawTime.split('.')[0] : '',
+        description: p.description,
+        project: projMap.get(p.projectId) ?? `ID ${p.projectId}`,
+      }
+    })
+  }, [data, projects, dateFormat])
 
   const loadData = useCallback(() => {
     Promise.all([
@@ -45,22 +65,6 @@ function Product() {
       .then(([prods, projs]) => {
         setData(prods)
         setProjects(projs)
-        const projMap = new Map(projs.map((p) => [p.id, p.name]))
-        setRows(
-          prods.map((p) => {
-            const [date, time] = p.publishDate.includes('T')
-              ? p.publishDate.split('T')
-              : [p.publishDate, '']
-            return {
-              name: p.name,
-              version: p.version,
-              date,
-              time: time ? time.split('.')[0] : '',
-              description: p.description,
-              project: projMap.get(p.projectId) ?? `ID ${p.projectId}`,
-            }
-          }),
-        )
       })
       .catch(setError)
       .finally(() => setLoading(false))
@@ -164,6 +168,12 @@ function Product() {
             data={rows}
             onEdit={(i) => setEditIndex(i)}
             onDelete={handleDelete}
+            onHeaderContext={(key, e) => {
+              if (key === 'date') {
+                e.preventDefault()
+                setDateFormat(dateFormat === 'DD-MM-YYYY' ? 'YYYY-MM-DD' : 'DD-MM-YYYY')
+              }
+            }}
             selectable
             selectedIndices={selectedIndices}
             onSelectionChange={setSelectedIndices}
