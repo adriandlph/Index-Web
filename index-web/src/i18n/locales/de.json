@@ -1,6 +1,6 @@
 {
   "lang": "GER",
-  "nav": { "home": "Start", "division": "Abteilung", "department": "Fachbereich", "project": "Projekt", "product": "Produkt" },
+  "nav": { "home": "Start", "division": "Abteilung", "department": "Fachbereich", "project": "Projekt", "product": "Produkt", "language": "Sprache" },
   "home": { "title": "Index Web", "subtitle": "Verwaltungspanel", "division": "Abteilung", "division_desc": "Verwalten Sie Unternehmensbereiche", "department": "Fachbereich", "department_desc": "Verwalten Sie Fachbereiche", "project": "Projekt", "project_desc": "Steuern Sie aktive Projekte", "product": "Produkt", "product_desc": "Vollständiger Produktkatalog" },
   "table": { "loading": "Laden...", "error": "Fehler", "title_division": "Abteilungen", "title_department": "Fachbereiche", "title_project": "Projekte", "title_product": "Produkte", "col_name": "Name", "col_division": "Abteilung", "col_department": "Fachbereich", "col_version": "Version", "col_date": "Datum", "col_time": "Uhrzeit", "col_description": "Beschreibung", "col_project": "Projekt", "selected": "ausgewählt" },
   "action": { "edit": "Bearbeiten", "delete": "Löschen", "cancel": "Abbrechen", "save": "Speichern", "confirm_delete": "{{name}} löschen?", "confirm_delete_selected": "{{count}} Elemente löschen?", "deleted": "Erfolgreich gelöscht", "saved": "Erfolgreich gespeichert", "error": "Fehler beim Speichern", "delete_selected": "Ausgewählte löschen" },

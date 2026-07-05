@@ -1,6 +1,6 @@
 {
   "lang": "CAT",
-  "nav": { "home": "Inici", "division": "Divisió", "department": "Departament", "project": "Projecte", "product": "Producte" },
+  "nav": { "home": "Inici", "division": "Divisió", "department": "Departament", "project": "Projecte", "product": "Producte", "language": "Idioma" },
   "home": { "title": "Index Web", "subtitle": "Panell d'administració", "division": "Divisió", "division_desc": "Gestiona les divisions de l'organització", "department": "Departament", "department_desc": "Administra els departaments", "project": "Projecte", "project_desc": "Controla els projectes actius", "product": "Producte", "product_desc": "Catàleg complet de productes" },
   "table": { "loading": "Carregant...", "error": "Error", "title_division": "Divisions", "title_department": "Departaments", "title_project": "Projectes", "title_product": "Productes", "col_name": "Nom", "col_division": "Divisió", "col_department": "Departament", "col_version": "Versió", "col_date": "Data", "col_time": "Hora", "col_description": "Descripció", "col_project": "Projecte", "selected": "seleccionats" },
   "action": { "edit": "Editar", "delete": "Eliminar", "cancel": "Cancel·lar", "save": "Guardar", "confirm_delete": "Eliminar {{name}}?", "confirm_delete_selected": "Eliminar {{count}} elements?", "deleted": "Eliminat correctament", "saved": "Guardat correctament", "error": "Error en guardar", "delete_selected": "Eliminar seleccionats" },

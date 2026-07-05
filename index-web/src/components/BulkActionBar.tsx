@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import Tooltip from './Tooltip.tsx'
 
 type BulkActionBarProps = {
   count: number
@@ -14,12 +15,14 @@ function BulkActionBar({ count, onDelete }: BulkActionBarProps) {
         <span className="text-sm text-gray-300">
           {count} {t('table.selected')}
         </span>
-        <button
-          onClick={onDelete}
-          className="rounded-lg bg-red-600 px-4 py-1.5 text-sm text-white transition-colors hover:bg-red-500"
-        >
-          {t('action.delete_selected')}
-        </button>
+        <Tooltip text={t('action.delete_selected')}>
+          <button
+            onClick={onDelete}
+            className="rounded-lg bg-red-600 px-4 py-1.5 text-sm text-white transition-colors hover:bg-red-500"
+          >
+            {t('action.delete_selected')}
+          </button>
+        </Tooltip>
       </div>
     </div>
   )

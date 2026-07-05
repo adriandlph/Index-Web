@@ -11,6 +11,7 @@ import ErrorState from '../components/ErrorState.tsx'
 import Notification from '../components/Notification.tsx'
 import ConfirmDialog from '../components/ConfirmDialog.tsx'
 import BulkActionBar from '../components/BulkActionBar.tsx'
+import Tooltip from '../components/Tooltip.tsx'
 
 const columns = (t: TFunction) => [
   { key: 'name' as const, header: t('table.col_name') },
@@ -140,14 +141,16 @@ function Project() {
             selectedIndices={selectedIndices}
             onSelectionChange={setSelectedIndices}
           />
-          <button
-            onClick={() => setCreating(true)}
-            className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-600 text-2xl text-white shadow-2xl transition-colors hover:bg-indigo-500"
-          >
-            <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-            </svg>
-          </button>
+          <Tooltip text={t('edit.title_create_project')}>
+            <button
+              onClick={() => setCreating(true)}
+              className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-600 text-2xl text-white shadow-2xl transition-colors hover:bg-indigo-500"
+            >
+              <svg className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+            </button>
+          </Tooltip>
           {editItem && (
             <EditModal
               title={t('edit.title_project')}

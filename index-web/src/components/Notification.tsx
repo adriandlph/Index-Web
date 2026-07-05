@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Tooltip from './Tooltip.tsx'
 
 type NotificationProps = {
   message: string
@@ -29,11 +30,13 @@ function Notification({ message, type = 'success', onClose }: NotificationProps)
       }`}
     >
       <span className="text-sm font-medium text-white">{message}</span>
-      <button onClick={() => { setVisible(false); setTimeout(onClose, 300) }} className="ml-2 text-white/60 hover:text-white">
-        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </button>
+      <Tooltip text="Close">
+        <button onClick={() => { setVisible(false); setTimeout(onClose, 300) }} className="ml-2 text-white/60 hover:text-white">
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </Tooltip>
     </div>
   )
 }
