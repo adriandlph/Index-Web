@@ -160,6 +160,7 @@ function Department() {
                   key: 'divisionId',
                   label: t('edit.division'),
                   value: String(editItem.divisionId),
+                  searchable: true,
                   options: divisions.map((d) => ({
                     value: String(d.id),
                     label: d.name,
@@ -179,6 +180,7 @@ function Department() {
                   key: 'divisionId',
                   label: t('edit.division'),
                   value: '',
+                  searchable: true,
                   options: divisions.map((d) => ({
                     value: String(d.id),
                     label: d.name,

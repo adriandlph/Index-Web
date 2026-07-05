@@ -160,6 +160,7 @@ function Project() {
                   key: 'departmentId',
                   label: t('edit.department'),
                   value: String(editItem.departmentId),
+                  searchable: true,
                   options: departments.map((d) => ({
                     value: String(d.id),
                     label: d.name,
@@ -179,6 +180,7 @@ function Project() {
                   key: 'departmentId',
                   label: t('edit.department'),
                   value: '',
+                  searchable: true,
                   options: departments.map((d) => ({
                     value: String(d.id),
                     label: d.name,

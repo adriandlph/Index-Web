@@ -207,6 +207,7 @@ function Product() {
                   key: 'projectId',
                   label: t('edit.project'),
                   value: String(editItem.projectId),
+                  searchable: true,
                   options: projects.map((p) => ({
                     value: String(p.id),
                     label: p.name,
@@ -230,6 +231,7 @@ function Product() {
                   key: 'projectId',
                   label: t('edit.project'),
                   value: '',
+                  searchable: true,
                   options: projects.map((p) => ({
                     value: String(p.id),
                     label: p.name,

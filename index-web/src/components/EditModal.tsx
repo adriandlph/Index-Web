@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react'
+import { Combobox, ComboboxInput, ComboboxOptions, ComboboxOption, Dialog, DialogBackdrop, DialogPanel, DialogTitle, Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react'
 import Tooltip from './Tooltip.tsx'
 
 type Field = {
@@ -8,6 +8,7 @@ type Field = {
   label: string
   value: string
   options?: { value: string; label: string }[]
+  searchable?: boolean
 }
 
 type EditModalProps = {
@@ -26,6 +27,7 @@ function EditModal({ title, fields, onSave, onClose }: EditModalProps) {
     }
     return initial
   })
+  const [searchQuery, setSearchQuery] = useState<Record<string, string>>({})
 
   return (
     <Dialog open={true} onClose={onClose} className="fixed inset-0 z-50">
@@ -37,7 +39,34 @@ function EditModal({ title, fields, onSave, onClose }: EditModalProps) {
             {fields.map((f) => (
               <div key={f.key}>
                 <label className="block text-sm text-gray-400 mb-1">{f.label}</label>
-                {f.options ? (
+                {f.options && f.searchable ? (
+                  <Combobox value={values[f.key]} onChange={(v) => { setValues({ ...values, [f.key]: v ?? '' }); setSearchQuery({ ...searchQuery, [f.key]: '' }) }}>
+                    <div className="relative">
+                      <ComboboxInput
+                        displayValue={(id: string | null) => f.options?.find((o) => o.value === id)?.label ?? ''}
+                        onChange={(e) => setSearchQuery({ ...searchQuery, [f.key]: e.target.value })}
+                        className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 focus:outline-none"
+                        placeholder="..."
+                      />
+                      <ComboboxOptions className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-gray-700 bg-gray-800 py-1 text-sm shadow-xl">
+                        {((searchQuery[f.key] ?? '') === ''
+                          ? f.options
+                          : f.options.filter((o) =>
+                              o.label.toLowerCase().includes((searchQuery[f.key] ?? '').toLowerCase())
+                            )
+                        ).slice(0, 5).map((o) => (
+                          <ComboboxOption
+                            key={o.value}
+                            value={o.value}
+                            className="cursor-pointer px-3 py-2 text-gray-300 transition-colors data-[focus]:bg-gray-700 data-[selected]:text-indigo-400"
+                          >
+                            {o.label}
+                          </ComboboxOption>
+                        ))}
+                      </ComboboxOptions>
+                    </div>
+                  </Combobox>
+                ) : f.options ? (
                   <Listbox
                     value={values[f.key]}
                     onChange={(v) => setValues({ ...values, [f.key]: v })}
