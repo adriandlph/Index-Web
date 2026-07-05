@@ -117,9 +117,11 @@ function DataTable<T>({
                 key={index}
                 onContextMenu={(e) => handleContext(e, index)}
                 className={`border-b border-gray-700 transition-colors ${
-                  selectedIndices?.has(index)
-                    ? 'bg-indigo-900/30 hover:bg-indigo-900/40'
-                    : 'hover:bg-gray-700'
+                  menu?.index === index
+                    ? 'bg-indigo-800/40'
+                    : selectedIndices?.has(index)
+                      ? 'bg-indigo-900/30 hover:bg-indigo-900/40'
+                      : 'hover:bg-gray-700'
                 }`}
               >
                 {selectable && (
