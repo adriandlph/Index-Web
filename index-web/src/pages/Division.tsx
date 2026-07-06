@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
-import type { DivisionResponse, DivisionRow } from '../types.ts'
+import type { DivisionResponse, DivisionRow, PageCountResponse } from '../types.ts'
 import { fetchApi, postApi, putApi, deleteApi } from '../services/api.ts'
 import { ENDPOINTS } from '../config/api.ts'
 import DataTable from '../components/DataTable.tsx'
@@ -22,6 +22,9 @@ function Division() {
   const [data, setData] = useState<DivisionResponse[]>([])
   const [rows, setRows] = useState<DivisionRow[]>([])
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(0)
+  const [pageSize, setPageSize] = useState(25)
+  const [totalPages, setTotalPages] = useState(0)
   const [error, setError] = useState<string | null>(null)
   const [editIndex, setEditIndex] = useState<number | null>(null)
   const [creating, setCreating] = useState(false)
@@ -32,14 +35,17 @@ function Division() {
   const [bulkDelete, setBulkDelete] = useState(false)
 
   const loadData = useCallback(() => {
-    fetchApi<DivisionResponse[]>(ENDPOINTS.divisions)
+    fetchApi<DivisionResponse[]>(ENDPOINTS.divisions, { count: String(pageSize), page: String(page) })
       .then((res) => {
         setData(res)
         setRows(res.map((d) => ({ name: d.name })))
+        fetchApi<PageCountResponse>(`${ENDPOINTS.divisions}/pages`, { count: String(pageSize) })
+          .then((pages) => setTotalPages(pages.totalPages))
+          .catch(() => setTotalPages(0))
       })
-      .catch(setError)
+      .catch((err) => { console.error(err); setError('SERVER_ERROR') })
       .finally(() => setLoading(false))
-  }, [])
+  }, [page, pageSize])
 
   useEffect(loadData, [loadData])
 
@@ -60,7 +66,8 @@ function Division() {
       await deleteApi(`${ENDPOINTS.divisions}/${item.id}`)
       notify(t('action.deleted'))
       loadData()
-    } catch {
+    } catch (err) {
+      console.error(err)
       notify(t('action.error'), 'error')
     }
     setDeleteIndex(null)
@@ -73,7 +80,8 @@ function Division() {
       notify(t('action.deleted'))
       setSelectedIndices(new Set())
       loadData()
-    } catch {
+    } catch (err) {
+      console.error(err)
       notify(t('action.error'), 'error')
     }
     setBulkDelete(false)
@@ -85,7 +93,8 @@ function Division() {
       notify(t('action.saved'))
       setCreating(false)
       loadData()
-    } catch {
+    } catch (err) {
+      console.error(err)
       notify(t('action.error'), 'error')
     }
   }
@@ -98,7 +107,8 @@ function Division() {
       notify(t('action.saved'))
       setEditIndex(null)
       loadData()
-    } catch {
+    } catch (err) {
+      console.error(err)
       notify(t('action.error'), 'error')
     }
   }
@@ -112,7 +122,7 @@ function Division() {
         <Notification message={notification} type={notifType} onClose={() => setNotification(null)} />
       )}
       {loading && <Loading />}
-      {error && !loading && <ErrorState message={error} />}
+      {error && !loading && <ErrorState />}
       {!loading && !error && (
         <>
           <DataTable
@@ -121,9 +131,13 @@ function Division() {
             data={rows}
             onEdit={(i) => setEditIndex(i)}
             onDelete={handleDelete}
-            selectable
             selectedIndices={selectedIndices}
             onSelectionChange={setSelectedIndices}
+            page={page}
+            pageSize={pageSize}
+            totalPages={totalPages}
+            onPageChange={setPage}
+            onPageSizeChange={setPageSize}
           />
           <Tooltip text={t('edit.create_division')}>
             <button

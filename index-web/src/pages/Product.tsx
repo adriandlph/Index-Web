@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
-import type { ProductResponse, ProjectResponse, ProductRow } from '../types.ts'
+import type { ProductResponse, ProjectResponse, DepartmentResponse, DivisionResponse, ProductRow, PageCountResponse } from '../types.ts'
 import { fetchApi, postApi, putApi, deleteApi } from '../services/api.ts'
 import { ENDPOINTS } from '../config/api.ts'
 import DataTable from '../components/DataTable.tsx'
@@ -12,6 +12,7 @@ import Notification from '../components/Notification.tsx'
 import ConfirmDialog from '../components/ConfirmDialog.tsx'
 import BulkActionBar from '../components/BulkActionBar.tsx'
 import Tooltip from '../components/Tooltip.tsx'
+import FilterSelect from '../components/FilterSelect.tsx'
 
 const columns = (t: TFunction) => [
   { key: 'name' as const, header: t('table.col_name') },
@@ -27,6 +28,9 @@ function Product() {
   const [data, setData] = useState<ProductResponse[]>([])
   const [projects, setProjects] = useState<ProjectResponse[]>([])
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(0)
+  const [pageSize, setPageSize] = useState(25)
+  const [totalPages, setTotalPages] = useState(0)
   const [error, setError] = useState<string | null>(null)
   const [editIndex, setEditIndex] = useState<number | null>(null)
   const [creating, setCreating] = useState(false)
@@ -36,6 +40,12 @@ function Product() {
   const [deleteIndex, setDeleteIndex] = useState<number | null>(null)
   const [bulkDelete, setBulkDelete] = useState(false)
   const [dateFormat, setDateFormat] = useState<'DD-MM-YYYY' | 'YYYY-MM-DD'>('DD-MM-YYYY')
+  const [filterDivisionId, setFilterDivisionId] = useState('')
+  const [filterDepartmentId, setFilterDepartmentId] = useState('')
+  const [filterProjectId, setFilterProjectId] = useState('')
+  const [allDivisions, setAllDivisions] = useState<DivisionResponse[]>([])
+  const [filterDepartments, setFilterDepartments] = useState<DepartmentResponse[]>([])
+  const [filterProjects, setFilterProjects] = useState<ProjectResponse[]>([])
 
   const rows = useMemo(() => {
     const projMap = new Map(projects.map((p) => [p.id, p.name]))
@@ -58,17 +68,56 @@ function Product() {
   }, [data, projects, dateFormat])
 
   const loadData = useCallback(() => {
+    const projId = filterProjectId || null
+    const deptId = !filterProjectId ? filterDepartmentId || null : null
+    const divId = !filterProjectId && !filterDepartmentId ? filterDivisionId || null : null
     Promise.all([
-      fetchApi<ProductResponse[]>(ENDPOINTS.products),
+      fetchApi<ProductResponse[]>(ENDPOINTS.products, { projectId: projId, departmentId: deptId, divisionId: divId, count: String(pageSize), page: String(page) }),
       fetchApi<ProjectResponse[]>(ENDPOINTS.projects),
     ])
       .then(([prods, projs]) => {
         setData(prods)
         setProjects(projs)
+        fetchApi<PageCountResponse>(`${ENDPOINTS.products}/pages`, { projectId: projId, departmentId: deptId, divisionId: divId, count: String(pageSize) })
+          .then((pages) => setTotalPages(pages.totalPages))
+          .catch(() => setTotalPages(0))
       })
-      .catch(setError)
+      .catch((err) => { console.error(err); setError('SERVER_ERROR') })
       .finally(() => setLoading(false))
+  }, [filterDivisionId, filterDepartmentId, filterProjectId, page, pageSize])
+
+  useEffect(() => {
+    fetchApi<DivisionResponse[]>(ENDPOINTS.divisions)
+      .then(setAllDivisions)
+      .catch(() => {})
   }, [])
+
+  useEffect(() => {
+    if (!filterDivisionId) return
+    fetchApi<DepartmentResponse[]>(ENDPOINTS.departments, { divisionId: filterDivisionId })
+      .then(setFilterDepartments)
+      .catch(() => setFilterDepartments([]))
+  }, [filterDivisionId])
+
+  useEffect(() => {
+    if (!filterDepartmentId) return
+    fetchApi<ProjectResponse[]>(ENDPOINTS.projects, { departmentId: filterDepartmentId })
+      .then(setFilterProjects)
+      .catch(() => setFilterProjects([]))
+  }, [filterDepartmentId])
+
+  function handleDivisionChange(id: string) {
+    setFilterDivisionId(id)
+    setFilterDepartmentId('')
+    setFilterProjectId('')
+    setPage(0)
+  }
+
+  function handleDepartmentChange(id: string) {
+    setFilterDepartmentId(id)
+    setFilterProjectId('')
+    setPage(0)
+  }
 
   useEffect(loadData, [loadData])
 
@@ -89,7 +138,8 @@ function Product() {
       await deleteApi(`${ENDPOINTS.products}/${item.id}`)
       notify(t('action.deleted'))
       loadData()
-    } catch {
+    } catch (err) {
+      console.error(err)
       notify(t('action.error'), 'error')
     }
     setDeleteIndex(null)
@@ -102,7 +152,8 @@ function Product() {
       notify(t('action.deleted'))
       setSelectedIndices(new Set())
       loadData()
-    } catch {
+    } catch (err) {
+      console.error(err)
       notify(t('action.error'), 'error')
     }
     setBulkDelete(false)
@@ -123,7 +174,8 @@ function Product() {
       notify(t('action.saved'))
       setCreating(false)
       loadData()
-    } catch {
+    } catch (err) {
+      console.error(err)
       notify(t('action.error'), 'error')
     }
   }
@@ -145,7 +197,8 @@ function Product() {
       notify(t('action.saved'))
       setEditIndex(null)
       loadData()
-    } catch {
+    } catch (err) {
+      console.error(err)
       notify(t('action.error'), 'error')
     }
   }
@@ -159,7 +212,7 @@ function Product() {
         <Notification message={notification} type={notifType} onClose={() => setNotification(null)} />
       )}
       {loading && <Loading />}
-      {error && !loading && <ErrorState message={error} />}
+      {error && !loading && <ErrorState />}
       {!loading && !error && (
         <>
           <DataTable
@@ -174,9 +227,39 @@ function Product() {
                 setDateFormat(dateFormat === 'DD-MM-YYYY' ? 'YYYY-MM-DD' : 'DD-MM-YYYY')
               }
             }}
-            selectable
             selectedIndices={selectedIndices}
             onSelectionChange={setSelectedIndices}
+            page={page}
+            pageSize={pageSize}
+            totalPages={totalPages}
+            onPageChange={setPage}
+            onPageSizeChange={setPageSize}
+            filterBar={
+              <>
+                <FilterSelect
+                  label={t('edit.division')}
+                  options={[{ value: '', label: t('table.all') }, ...allDivisions.map((d) => ({ value: String(d.id), label: d.name }))]}
+                  value={filterDivisionId}
+                  onChange={handleDivisionChange}
+                />
+                {filterDivisionId && (
+                  <FilterSelect
+                    label={t('edit.department')}
+                    options={[{ value: '', label: t('table.all') }, ...filterDepartments.map((d) => ({ value: String(d.id), label: d.name }))]}
+                    value={filterDepartmentId}
+                    onChange={handleDepartmentChange}
+                  />
+                )}
+                {filterDepartmentId && (
+                  <FilterSelect
+                    label={t('edit.project')}
+                    options={[{ value: '', label: t('table.all') }, ...filterProjects.map((p) => ({ value: String(p.id), label: p.name }))]}
+                    value={filterProjectId}
+                    onChange={(id) => { setFilterProjectId(id); setPage(0) }}
+                  />
+                )}
+              </>
+            }
           />
           <Tooltip text={t('edit.title_create_product')}>
             <button

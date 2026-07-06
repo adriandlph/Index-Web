@@ -16,8 +16,14 @@ async function request<T>(path: string, options?: RequestInit): Promise<T> {
   return body.data
 }
 
-export async function fetchApi<T>(path: string): Promise<T> {
-  return request<T>(path)
+export async function fetchApi<T>(path: string, params?: Record<string, string | null | undefined>): Promise<T> {
+  const url = params
+    ? `${path}?${Object.entries(params)
+        .filter(([, v]) => v != null && v !== '')
+        .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v!)}`)
+        .join('&')}`
+    : path
+  return request<T>(url)
 }
 
 export async function postApi<T>(path: string, data: unknown): Promise<T> {
