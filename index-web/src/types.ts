@@ -52,3 +52,8 @@ export interface ProductRow {
   description: string
   project: string
 }
+
+export interface PageCountResponse {
+  totalCount: number
+  totalPages: number
+}

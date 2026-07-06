@@ -22,7 +22,14 @@ function RootLayout() {
     <div className="min-h-svh bg-gray-900 flex flex-col">
       <header className="border-b border-gray-800">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link to={ROUTES.home} className="text-xl font-bold text-white tracking-tight">
+          <Link to={ROUTES.home} className="flex items-center gap-2 text-xl font-bold text-white tracking-tight">
+            <svg className="h-7 w-7" viewBox="0 0 24 24">
+              <rect x="2.5" y="2.5" width="19" height="19" rx="3" fill="#6366f1" />
+              <rect x="5" y="6" width="14" height="5" rx="1.5" fill="#eef2ff" />
+              <rect x="5" y="13" width="14" height="5" rx="1.5" fill="#eef2ff" />
+              <rect x="10" y="7.5" width="4" height="2" rx="1" fill="#6366f1" />
+              <rect x="10" y="14.5" width="4" height="2" rx="1" fill="#6366f1" />
+            </svg>
             Index<span className="text-indigo-400">Web</span>
           </Link>
           <div className="flex items-center gap-4">

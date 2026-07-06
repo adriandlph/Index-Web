@@ -1,8 +1,8 @@
-export const API_BASE = 'http://localhost:9000'
+export const API_BASE = ''
 
 export const ENDPOINTS = {
-  divisions: '/divisions',
-  departments: '/departments',
-  projects: '/projects',
-  products: '/products',
+  divisions: '/api/divisions',
+  departments: '/api/departments',
+  projects: '/api/projects',
+  products: '/api/products',
 } as const

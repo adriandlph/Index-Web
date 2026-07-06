@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
-import type { DepartmentResponse, DivisionResponse, DepartmentRow } from '../types.ts'
+import type { DepartmentResponse, DivisionResponse, DepartmentRow, PageCountResponse } from '../types.ts'
 import { fetchApi, postApi, putApi, deleteApi } from '../services/api.ts'
 import { ENDPOINTS } from '../config/api.ts'
 import DataTable from '../components/DataTable.tsx'
@@ -12,6 +12,7 @@ import Notification from '../components/Notification.tsx'
 import ConfirmDialog from '../components/ConfirmDialog.tsx'
 import BulkActionBar from '../components/BulkActionBar.tsx'
 import Tooltip from '../components/Tooltip.tsx'
+import FilterSelect from '../components/FilterSelect.tsx'
 
 const columns = (t: TFunction) => [
   { key: 'name' as const, header: t('table.col_name') },
@@ -24,6 +25,9 @@ function Department() {
   const [rows, setRows] = useState<DepartmentRow[]>([])
   const [divisions, setDivisions] = useState<DivisionResponse[]>([])
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(0)
+  const [pageSize, setPageSize] = useState(25)
+  const [totalPages, setTotalPages] = useState(0)
   const [error, setError] = useState<string | null>(null)
   const [editIndex, setEditIndex] = useState<number | null>(null)
   const [creating, setCreating] = useState(false)
@@ -32,10 +36,11 @@ function Department() {
   const [notifType, setNotifType] = useState<'success' | 'error'>('success')
   const [deleteIndex, setDeleteIndex] = useState<number | null>(null)
   const [bulkDelete, setBulkDelete] = useState(false)
+  const [filterDivisionId, setFilterDivisionId] = useState('')
 
   const loadData = useCallback(() => {
     Promise.all([
-      fetchApi<DepartmentResponse[]>(ENDPOINTS.departments),
+      fetchApi<DepartmentResponse[]>(ENDPOINTS.departments, { divisionId: filterDivisionId || null, count: String(pageSize), page: String(page) }),
       fetchApi<DivisionResponse[]>(ENDPOINTS.divisions),
     ])
       .then(([depts, divs]) => {
@@ -46,10 +51,13 @@ function Department() {
           name: d.name,
           division: divMap.get(d.divisionId) ?? `ID ${d.divisionId}`,
         })))
+        fetchApi<PageCountResponse>(`${ENDPOINTS.departments}/pages`, { divisionId: filterDivisionId || null, count: String(pageSize) })
+          .then((pages) => setTotalPages(pages.totalPages))
+          .catch(() => setTotalPages(0))
       })
-      .catch(setError)
+      .catch((err) => { console.error(err); setError('SERVER_ERROR') })
       .finally(() => setLoading(false))
-  }, [])
+  }, [filterDivisionId, page, pageSize])
 
   useEffect(loadData, [loadData])
 
@@ -70,7 +78,8 @@ function Department() {
       await deleteApi(`${ENDPOINTS.departments}/${item.id}`)
       notify(t('action.deleted'))
       loadData()
-    } catch {
+    } catch (err) {
+      console.error(err)
       notify(t('action.error'), 'error')
     }
     setDeleteIndex(null)
@@ -83,7 +92,8 @@ function Department() {
       notify(t('action.deleted'))
       setSelectedIndices(new Set())
       loadData()
-    } catch {
+    } catch (err) {
+      console.error(err)
       notify(t('action.error'), 'error')
     }
     setBulkDelete(false)
@@ -98,7 +108,8 @@ function Department() {
       notify(t('action.saved'))
       setCreating(false)
       loadData()
-    } catch {
+    } catch (err) {
+      console.error(err)
       notify(t('action.error'), 'error')
     }
   }
@@ -114,7 +125,8 @@ function Department() {
       notify(t('action.saved'))
       setEditIndex(null)
       loadData()
-    } catch {
+    } catch (err) {
+      console.error(err)
       notify(t('action.error'), 'error')
     }
   }
@@ -128,7 +140,7 @@ function Department() {
         <Notification message={notification} type={notifType} onClose={() => setNotification(null)} />
       )}
       {loading && <Loading />}
-      {error && !loading && <ErrorState message={error} />}
+      {error && !loading && <ErrorState />}
       {!loading && !error && (
         <>
           <DataTable
@@ -137,9 +149,21 @@ function Department() {
             data={rows}
             onEdit={(i) => setEditIndex(i)}
             onDelete={handleDelete}
-            selectable
             selectedIndices={selectedIndices}
             onSelectionChange={setSelectedIndices}
+            page={page}
+            pageSize={pageSize}
+            totalPages={totalPages}
+            onPageChange={setPage}
+            onPageSizeChange={setPageSize}
+            filterBar={
+              <FilterSelect
+                label={t('edit.division')}
+                options={[{ value: '', label: t('table.all') }, ...divisions.map((d) => ({ value: String(d.id), label: d.name }))]}
+                value={filterDivisionId}
+                onChange={(id) => { setFilterDivisionId(id); setPage(0) }}
+              />
+            }
           />
           <Tooltip text={t('edit.title_create_department')}>
             <button
