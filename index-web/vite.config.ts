@@ -18,6 +18,17 @@ const httpsConfig = (() => {
 export default defineConfig({
   base: '/',
   plugins: [tailwindcss(), react()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id: string) {
+          if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/') || id.includes('node_modules/react-router')) return 'vendor'
+          if (id.includes('node_modules/@headlessui')) return 'ui'
+          if (id.includes('node_modules/i18next') || id.includes('node_modules/react-i18next')) return 'i18n'
+        },
+      },
+    },
+  },
   server: {
     https: httpsConfig,
     proxy: {
