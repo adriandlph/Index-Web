@@ -152,7 +152,7 @@ function Division() {
           {editItem && (
             <EditModal
               title={t('edit.title_division')}
-              fields={[{ key: 'name', label: t('edit.name'), value: editItem.name }]}
+              fields={[{ key: 'name', label: t('edit.name'), value: editItem.name, required: true, placeholder: 'Division name' }]}
               onSave={handleEdit}
               onClose={() => setEditIndex(null)}
             />
@@ -160,7 +160,7 @@ function Division() {
           {creating && (
             <EditModal
               title={t('edit.title_create_division')}
-              fields={[{ key: 'name', label: t('edit.name'), value: '' }]}
+              fields={[{ key: 'name', label: t('edit.name'), value: '', required: true, placeholder: 'Division name' }]}
               onSave={handleCreate}
               onClose={() => setCreating(false)}
             />

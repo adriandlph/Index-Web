@@ -1,10 +1,90 @@
 {
   "lang": "HIN",
-  "nav": { "home": "होम", "division": "प्रभाग", "department": "विभाग", "project": "परियोजनाएँ", "product": "उत्पाद", "language": "भाषा", "brand": "Rayden products index" },
-  "home": { "title": "Rayden Product Index", "subtitle": "प्रशासन पैनल", "division": "प्रभाग", "division_desc": "संगठन के प्रभागों का प्रबंधन करें", "department": "विभाग", "department_desc": "विभागों का प्रबंधन करें", "project": "परियोजनाएँ", "project_desc": "सक्रिय परियोजनाओं को नियंत्रित करें", "product": "उत्पाद", "product_desc": "पूर्ण उत्पाद सूची" },
-  "table": { "loading": "लोड हो रहा है...", "error": "त्रुटि", "server_error": "सर्वर से कनेक्ट करने में समस्या है। कृपया हल होने तक प्रतीक्षा करें। असुविधा के लिए खेद है।", "title_division": "प्रभाग", "title_department": "विभाग", "title_project": "परियोजनाएँ", "title_product": "उत्पाद", "col_name": "नाम", "col_division": "प्रभाग", "col_department": "विभाग", "col_version": "संस्करण", "col_date": "दिनांक", "col_time": "समय", "col_description": "विवरण", "col_project": "परियोजना", "selected": "चयनित", "all": "सभी", "rows_per_page": "प्रति पृष्ठ पंक्तियाँ:", "page": "पृष्ठ {{current}} का {{total}}", "id_prefix": "ID" },
-  "action": { "edit": "संपादित करें", "delete": "हटाएँ", "cancel": "रद्द करें", "save": "सहेजें", "confirm_delete": "{{name}} को हटाएँ?", "confirm_delete_selected": "{{count}} आइटम हटाएँ?", "deleted": "सफलतापूर्वक हटाया गया", "saved": "सफलतापूर्वक सहेजा गया", "error": "सहेजते समय त्रुटि", "delete_selected": "चयनित हटाएँ", "confirm": "पुष्टि करें" },
-  "notFound": { "title": "404", "message": "पृष्ठ नहीं मिला", "back": "होम पर वापस जाएँ" },
-  "edit": { "title_division": "प्रभाग संपादित करें", "title_department": "विभाग संपादित करें", "title_project": "परियोजना संपादित करें", "title_product": "उत्पाद संपादित करें", "title_create_division": "नया प्रभाग", "title_create_department": "नया विभाग", "title_create_project": "नई परियोजना", "title_create_product": "नया उत्पाद", "name": "नाम", "division": "प्रभाग", "department": "विभाग", "project": "परियोजना", "version": "संस्करण", "publishDate": "प्रकाशन तिथि", "description": "विवरण" },
-  "tooltip": { "filters": "फ़िल्टर", "close": "बंद करें" }
+  "nav": {
+    "home": "होम",
+    "division": "प्रभाग",
+    "department": "विभाग",
+    "project": "परियोजनाएँ",
+    "product": "उत्पाद",
+    "language": "भाषा",
+    "brand": "Rayden products index"
+  },
+  "home": {
+    "title": "Rayden Product Index",
+    "subtitle": "प्रशासन पैनल",
+    "division": "प्रभाग",
+    "division_desc": "संगठन के प्रभागों का प्रबंधन करें",
+    "department": "विभाग",
+    "department_desc": "विभागों का प्रबंधन करें",
+    "project": "परियोजनाएँ",
+    "project_desc": "सक्रिय परियोजनाओं को नियंत्रित करें",
+    "product": "उत्पाद",
+    "product_desc": "पूर्ण उत्पाद सूची"
+  },
+  "table": {
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "server_error": "सर्वर से कनेक्ट करने में समस्या है। कृपया हल होने तक प्रतीक्षा करें। असुविधा के लिए खेद है।",
+    "title_division": "प्रभाग",
+    "title_department": "विभाग",
+    "title_project": "परियोजनाएँ",
+    "title_product": "उत्पाद",
+    "col_name": "नाम",
+    "col_division": "प्रभाग",
+    "col_department": "विभाग",
+    "col_version": "संस्करण",
+    "col_date": "दिनांक",
+    "col_time": "समय",
+    "col_description": "विवरण",
+    "col_project": "परियोजना",
+    "selected": "चयनित",
+    "all": "सभी",
+    "rows_per_page": "प्रति पृष्ठ पंक्तियाँ:",
+    "page": "पृष्ठ {{current}} का {{total}}",
+    "id_prefix": "ID"
+  },
+  "action": {
+    "edit": "संपादित करें",
+    "delete": "हटाएँ",
+    "cancel": "रद्द करें",
+    "save": "सहेजें",
+    "confirm_delete": "{{name}} को हटाएँ?",
+    "confirm_delete_selected": "{{count}} आइटम हटाएँ?",
+    "deleted": "सफलतापूर्वक हटाया गया",
+    "saved": "सफलतापूर्वक सहेजा गया",
+    "error": "सहेजते समय त्रुटि",
+    "delete_selected": "चयनित हटाएँ",
+    "confirm": "पुष्टि करें"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "पृष्ठ नहीं मिला",
+    "back": "होम पर वापस जाएँ"
+  },
+  "edit": {
+    "title_division": "प्रभाग संपादित करें",
+    "title_department": "विभाग संपादित करें",
+    "title_project": "परियोजना संपादित करें",
+    "title_product": "उत्पाद संपादित करें",
+    "title_create_division": "नया प्रभाग",
+    "title_create_department": "नया विभाग",
+    "title_create_project": "नई परियोजना",
+    "title_create_product": "नया उत्पाद",
+    "name": "नाम",
+    "division": "प्रभाग",
+    "department": "विभाग",
+    "project": "परियोजना",
+    "version": "संस्करण",
+    "publishDate": "प्रकाशन तिथि",
+    "description": "विवरण",
+    "publishTime": "प्रकाशन समय"
+  },
+  "tooltip": {
+    "filters": "फ़िल्टर",
+    "close": "बंद करें"
+  },
+  "validation": {
+    "required": "{{field}} आवश्यक है",
+    "invalidFormat": "अमान्य प्रारूप"
+  }
 }

@@ -1,10 +1,90 @@
 {
   "lang": "ENG",
-  "nav": { "home": "Home", "division": "Divisions", "department": "Departments", "project": "Projects", "product": "Products", "language": "Language", "brand": "Rayden products index" },
-  "home": { "title": "Rayden Product Index", "subtitle": "Administration panel", "division": "Divisions", "division_desc": "Manage organization divisions", "department": "Departments", "department_desc": "Manage departments", "project": "Projects", "project_desc": "Control active projects", "product": "Products", "product_desc": "Complete product catalog" },
-  "table": { "loading": "Loading...", "error": "Error", "server_error": "There are problems connecting to the server. Please wait for it to be resolved. Sorry for the inconvenience.", "title_division": "Divisions", "title_department": "Departments", "title_project": "Projects", "title_product": "Products", "col_name": "Name", "col_division": "Division", "col_department": "Department", "col_version": "Version", "col_date": "Date", "col_time": "Time", "col_description": "Description", "col_project": "Project", "selected": "selected", "all": "All", "rows_per_page": "Rows per page:", "page": "Page {{current}} of {{total}}", "id_prefix": "ID" },
-  "action": { "edit": "Edit", "delete": "Delete", "cancel": "Cancel", "save": "Save", "confirm_delete": "Delete {{name}}?", "confirm_delete_selected": "Delete {{count}} items?", "deleted": "Deleted successfully", "saved": "Saved successfully", "error": "Error saving", "delete_selected": "Delete selected", "confirm": "Confirm" },
-  "notFound": { "title": "404", "message": "Page not found", "back": "Back to home" },
-  "edit": { "title_division": "Edit Division", "title_department": "Edit Department", "title_project": "Edit Project", "title_product": "Edit Product", "title_create_division": "New Division", "title_create_department": "New Department", "title_create_project": "New Project", "title_create_product": "New Product", "name": "Name", "division": "Division", "department": "Department", "project": "Project", "version": "Version", "publishDate": "Publish date", "description": "Description" },
-  "tooltip": { "filters": "Filters", "close": "Close" }
+  "nav": {
+    "home": "Home",
+    "division": "Divisions",
+    "department": "Departments",
+    "project": "Projects",
+    "product": "Products",
+    "language": "Language",
+    "brand": "Rayden products index"
+  },
+  "home": {
+    "title": "Rayden Product Index",
+    "subtitle": "Administration panel",
+    "division": "Divisions",
+    "division_desc": "Manage organization divisions",
+    "department": "Departments",
+    "department_desc": "Manage departments",
+    "project": "Projects",
+    "project_desc": "Control active projects",
+    "product": "Products",
+    "product_desc": "Complete product catalog"
+  },
+  "table": {
+    "loading": "Loading...",
+    "error": "Error",
+    "server_error": "There are problems connecting to the server. Please wait for it to be resolved. Sorry for the inconvenience.",
+    "title_division": "Divisions",
+    "title_department": "Departments",
+    "title_project": "Projects",
+    "title_product": "Products",
+    "col_name": "Name",
+    "col_division": "Division",
+    "col_department": "Department",
+    "col_version": "Version",
+    "col_date": "Date",
+    "col_time": "Time",
+    "col_description": "Description",
+    "col_project": "Project",
+    "selected": "selected",
+    "all": "All",
+    "rows_per_page": "Rows per page:",
+    "page": "Page {{current}} of {{total}}",
+    "id_prefix": "ID"
+  },
+  "action": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "confirm_delete": "Delete {{name}}?",
+    "confirm_delete_selected": "Delete {{count}} items?",
+    "deleted": "Deleted successfully",
+    "saved": "Saved successfully",
+    "error": "Error saving",
+    "delete_selected": "Delete selected",
+    "confirm": "Confirm"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Page not found",
+    "back": "Back to home"
+  },
+  "edit": {
+    "title_division": "Edit Division",
+    "title_department": "Edit Department",
+    "title_project": "Edit Project",
+    "title_product": "Edit Product",
+    "title_create_division": "New Division",
+    "title_create_department": "New Department",
+    "title_create_project": "New Project",
+    "title_create_product": "New Product",
+    "name": "Name",
+    "division": "Division",
+    "department": "Department",
+    "project": "Project",
+    "version": "Version",
+    "publishDate": "Publish date",
+    "description": "Description",
+    "publishTime": "Publish time"
+  },
+  "tooltip": {
+    "filters": "Filters",
+    "close": "Close"
+  },
+  "validation": {
+    "required": "{{field}} is required",
+    "invalidFormat": "Invalid format"
+  }
 }

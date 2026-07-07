@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Combobox, ComboboxInput, ComboboxOptions, ComboboxOption, Dialog, DialogBackdrop, DialogPanel, DialogTitle, Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react'
 import Tooltip from './Tooltip.tsx'
+import DatePicker from './DatePicker.tsx'
+import TimePicker from './TimePicker.tsx'
 
 type Field = {
   key: string
@@ -9,6 +11,11 @@ type Field = {
   value: string
   options?: { value: string; label: string }[]
   searchable?: boolean
+  type?: 'text' | 'date' | 'time'
+  required?: boolean
+  pattern?: string
+  patternMessage?: string
+  placeholder?: string
 }
 
 type EditModalProps = {
@@ -17,6 +24,8 @@ type EditModalProps = {
   onSave: (values: Record<string, string>) => void
   onClose: () => void
 }
+
+type Errors = Record<string, string>
 
 function EditModal({ title, fields, onSave, onClose }: EditModalProps) {
   const { t } = useTranslation()
@@ -28,6 +37,32 @@ function EditModal({ title, fields, onSave, onClose }: EditModalProps) {
     return initial
   })
   const [searchQuery, setSearchQuery] = useState<Record<string, string>>({})
+  const [errors, setErrors] = useState<Errors>({})
+
+  function validate(): boolean {
+    const newErrors: Errors = {}
+    for (const f of fields) {
+      const val = values[f.key]?.trim() ?? ''
+      if (f.required && !val) {
+        newErrors[f.key] = t('validation.required', { field: f.label })
+      } else if (f.pattern && val) {
+        try {
+          const regex = new RegExp(f.pattern)
+          if (!regex.test(val)) {
+            newErrors[f.key] = f.patternMessage || t('validation.invalidFormat')
+          }
+        } catch {}
+      }
+    }
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
+  function handleSave() {
+    if (validate()) {
+      onSave(values)
+    }
+  }
 
   return (
     <Dialog open={true} onClose={onClose} className="fixed inset-0 z-50">
@@ -38,15 +73,18 @@ function EditModal({ title, fields, onSave, onClose }: EditModalProps) {
           <div className="space-y-4">
             {fields.map((f) => (
               <div key={f.key}>
-                <label className="block text-sm text-gray-400 mb-1">{f.label}</label>
+                <label className="block text-sm text-gray-400 mb-1">
+                  {f.label}
+                  {f.required && <span className="text-red-400 ml-1">*</span>}
+                </label>
                 {f.options && f.searchable ? (
-                  <Combobox value={values[f.key]} onChange={(v) => { setValues({ ...values, [f.key]: v ?? '' }); setSearchQuery({ ...searchQuery, [f.key]: '' }) }}>
+                  <Combobox value={values[f.key]} onChange={(v) => { setValues({ ...values, [f.key]: v ?? '' }); setErrors({ ...errors, [f.key]: '' }); setSearchQuery({ ...searchQuery, [f.key]: '' }) }}>
                     <div className="relative">
                       <ComboboxInput
                         displayValue={(id: string | null) => f.options?.find((o) => o.value === id)?.label ?? ''}
                         onChange={(e) => setSearchQuery({ ...searchQuery, [f.key]: e.target.value })}
                         className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-200 placeholder-gray-500 focus:outline-none"
-                        placeholder="..."
+                        placeholder={f.placeholder || '...'}
                       />
                       <ComboboxOptions className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-lg border border-gray-700 bg-gray-800 py-1 text-sm shadow-xl">
                         {((searchQuery[f.key] ?? '') === ''
@@ -65,11 +103,12 @@ function EditModal({ title, fields, onSave, onClose }: EditModalProps) {
                         ))}
                       </ComboboxOptions>
                     </div>
+                    {errors[f.key] && <p className="mt-1 text-xs text-red-400">{errors[f.key]}</p>}
                   </Combobox>
                 ) : f.options ? (
                   <Listbox
                     value={values[f.key]}
-                    onChange={(v) => setValues({ ...values, [f.key]: v })}
+                    onChange={(v) => { setValues({ ...values, [f.key]: v }); setErrors({ ...errors, [f.key]: '' }) }}
                   >
                     <ListboxButton className="flex w-full items-center justify-between gap-2 rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-200 transition-colors hover:bg-gray-700">
                       <span>{f.options.find((o) => o.value === values[f.key])?.label}</span>
@@ -89,14 +128,28 @@ function EditModal({ title, fields, onSave, onClose }: EditModalProps) {
                       ))}
                     </ListboxOptions>
                   </Listbox>
+                ) : f.type === 'date' ? (
+                  <DatePicker
+                    value={values[f.key]}
+                    placeholder={f.placeholder}
+                    onChange={(v) => { setValues({ ...values, [f.key]: v }); setErrors({ ...errors, [f.key]: '' }) }}
+                  />
+                ) : f.type === 'time' ? (
+                  <TimePicker
+                    value={values[f.key]}
+                    placeholder={f.placeholder}
+                    onChange={(v) => { setValues({ ...values, [f.key]: v }); setErrors({ ...errors, [f.key]: '' }) }}
+                  />
                 ) : (
                   <input
                     type="text"
                     value={values[f.key]}
-                    onChange={(e) => setValues({ ...values, [f.key]: e.target.value })}
-                    className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-200"
+                    placeholder={f.placeholder}
+                    onChange={(e) => { setValues({ ...values, [f.key]: e.target.value }); setErrors({ ...errors, [f.key]: '' }) }}
+                    className="w-full rounded-lg border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-200 placeholder-gray-500"
                   />
                 )}
+                {errors[f.key] && <p className="mt-1 text-xs text-red-400">{errors[f.key]}</p>}
               </div>
             ))}
           </div>
@@ -111,7 +164,7 @@ function EditModal({ title, fields, onSave, onClose }: EditModalProps) {
             </Tooltip>
             <Tooltip text={t('action.save')}>
               <button
-                onClick={() => onSave(values)}
+                onClick={handleSave}
                 className="rounded-lg bg-indigo-600 px-4 py-2 text-sm text-white transition-colors hover:bg-indigo-500"
               >
                 {t('action.save')}

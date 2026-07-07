@@ -1,10 +1,91 @@
 {
   "lang": "EUS",
-  "nav": { "home": "Hasiera", "division": "Dibisioak", "department": "Sailak", "project": "Proiektuak", "product": "Produktuak", "language": "Hizkuntza", "brand": "Rayden products index" },
-  "home": { "title": "Rayden Product Index", "subtitle": "Administrazioa panela", "division": "Dibisioak", "division_desc": "Kudeatu erakundearen dibisioak", "department": "Sailak", "department_desc": "Kudeatu sailak", "project": "Proiektuak", "project_desc": "Kontrolatu proiektu aktiboak", "product": "Produktuak", "product_desc": "Produktu katalogo osoa" },
-  "table": { "loading": "Kargatzen...", "error": "Errorea", "server_error": "Arazoak daude zerbitzarira konektatzeko. Mesedez, itxaron konpondu arte. Barkatu eragozpenak.", "title_division": "Dibisioak", "title_department": "Sailak", "title_project": "Proiektuak", "title_product": "Produktuak", "col_name": "Izena", "col_division": "Dibisioa", "col_department": "Saila", "col_version": "Bertsioa", "col_date": "Data", "col_time": "Ordua", "col_description": "Deskribapena", "col_project": "Proiektua", "selected": "hautatuak", "all": "Guztiak", "rows_per_page": "Orrialdeko errenkadak:", "page": "Orrialdea {{current}} / {{total}}", "id_prefix": "ID" },
-  "action": { "edit": "Editatu", "delete": "Ezabatu", "cancel": "Utzi", "save": "Gorde", "confirm_delete": "{{name}} ezabatu?", "confirm_delete_selected": "{{count}} elementu ezabatu?", "deleted": "Ondo ezabatuta", "saved": "Ondo gordeta", "error": "Errorea gordetzean", "delete_selected": "Ezabatu hautatuak", "confirm": "Berretsi" },
-  "notFound": { "title": "404", "message": "Orria ez da aurkitu", "back": "Itzuli hasierara" },
-  "edit": { "title_division": "Dibisioa Editatu", "title_department": "Saila Editatu", "title_project": "Proiektua Editatu", "title_product": "Produktua Editatu", "title_create_division": "Dibisio Berria", "title_create_department": "Sail Berria", "title_create_project": "Proiektu Berria", "title_create_product": "Produktu Berria", "name": "Izena", "division": "Dibisioa", "department": "Saila", "project": "Proiektua", "version": "Bertsioa", "publishDate": "Argitaratze data", "description": "Deskribapena", "change_date_format": "Data formatua: {{format}}" },
-  "tooltip": { "filters": "Iragazkiak", "close": "Itxi" }
+  "nav": {
+    "home": "Hasiera",
+    "division": "Dibisioak",
+    "department": "Sailak",
+    "project": "Proiektuak",
+    "product": "Produktuak",
+    "language": "Hizkuntza",
+    "brand": "Rayden products index"
+  },
+  "home": {
+    "title": "Rayden Product Index",
+    "subtitle": "Administrazioa panela",
+    "division": "Dibisioak",
+    "division_desc": "Kudeatu erakundearen dibisioak",
+    "department": "Sailak",
+    "department_desc": "Kudeatu sailak",
+    "project": "Proiektuak",
+    "project_desc": "Kontrolatu proiektu aktiboak",
+    "product": "Produktuak",
+    "product_desc": "Produktu katalogo osoa"
+  },
+  "table": {
+    "loading": "Kargatzen...",
+    "error": "Errorea",
+    "server_error": "Arazoak daude zerbitzarira konektatzeko. Mesedez, itxaron konpondu arte. Barkatu eragozpenak.",
+    "title_division": "Dibisioak",
+    "title_department": "Sailak",
+    "title_project": "Proiektuak",
+    "title_product": "Produktuak",
+    "col_name": "Izena",
+    "col_division": "Dibisioa",
+    "col_department": "Saila",
+    "col_version": "Bertsioa",
+    "col_date": "Data",
+    "col_time": "Ordua",
+    "col_description": "Deskribapena",
+    "col_project": "Proiektua",
+    "selected": "hautatuak",
+    "all": "Guztiak",
+    "rows_per_page": "Orrialdeko errenkadak:",
+    "page": "Orrialdea {{current}} / {{total}}",
+    "id_prefix": "ID"
+  },
+  "action": {
+    "edit": "Editatu",
+    "delete": "Ezabatu",
+    "cancel": "Utzi",
+    "save": "Gorde",
+    "confirm_delete": "{{name}} ezabatu?",
+    "confirm_delete_selected": "{{count}} elementu ezabatu?",
+    "deleted": "Ondo ezabatuta",
+    "saved": "Ondo gordeta",
+    "error": "Errorea gordetzean",
+    "delete_selected": "Ezabatu hautatuak",
+    "confirm": "Berretsi"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Orria ez da aurkitu",
+    "back": "Itzuli hasierara"
+  },
+  "edit": {
+    "title_division": "Dibisioa Editatu",
+    "title_department": "Saila Editatu",
+    "title_project": "Proiektua Editatu",
+    "title_product": "Produktua Editatu",
+    "title_create_division": "Dibisio Berria",
+    "title_create_department": "Sail Berria",
+    "title_create_project": "Proiektu Berria",
+    "title_create_product": "Produktu Berria",
+    "name": "Izena",
+    "division": "Dibisioa",
+    "department": "Saila",
+    "project": "Proiektua",
+    "version": "Bertsioa",
+    "publishDate": "Argitaratze data",
+    "description": "Deskribapena",
+    "change_date_format": "Data formatua: {{format}}",
+    "publishTime": "Argitaratze ordua"
+  },
+  "tooltip": {
+    "filters": "Iragazkiak",
+    "close": "Itxi"
+  },
+  "validation": {
+    "required": "{{field}} beharrezkoa da",
+    "invalidFormat": "Formatu baliogabea"
+  }
 }

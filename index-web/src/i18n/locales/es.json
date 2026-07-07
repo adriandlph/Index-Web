@@ -1,10 +1,90 @@
 {
   "lang": "ESP",
-  "nav": { "home": "Inicio", "division": "Divisiones", "department": "Departamentos", "project": "Proyectos", "product": "Productos", "language": "Idioma", "brand": "Rayden products index" },
-  "home": { "title": "Rayden Product Index", "subtitle": "Panel de administración", "division": "Divisiones", "division_desc": "Gestiona las divisiones de la organización", "department": "Departamentos", "department_desc": "Administra los departamentos", "project": "Proyectos", "project_desc": "Controla los proyectos activos", "product": "Productos", "product_desc": "Catálogo completo de productos" },
-  "table": { "loading": "Cargando...", "error": "Error", "server_error": "Hay problemas para conectarse al servidor. Por favor, espere a que se resuelva. Disculpen las molestias.", "title_division": "Divisiones", "title_department": "Departamentos", "title_project": "Proyectos", "title_product": "Productos", "col_name": "Nombre", "col_division": "División", "col_department": "Departamento", "col_version": "Versión", "col_date": "Fecha", "col_time": "Hora", "col_description": "Descripción", "col_project": "Proyecto", "selected": "seleccionados", "all": "Todos", "rows_per_page": "Filas por página:", "page": "Página {{current}} de {{total}}", "id_prefix": "ID" },
-  "action": { "edit": "Editar", "delete": "Eliminar", "cancel": "Cancelar", "save": "Guardar", "confirm_delete": "¿Eliminar {{name}}?", "confirm_delete_selected": "¿Eliminar {{count}} elementos?", "deleted": "Eliminado correctamente", "saved": "Guardado correctamente", "error": "Error al guardar", "delete_selected": "Eliminar seleccionados", "confirm": "Confirmar" },
-  "notFound": { "title": "404", "message": "Página no encontrada", "back": "Volver al inicio" },
-  "edit": { "title_division": "Editar División", "title_department": "Editar Departamento", "title_project": "Editar Proyecto", "title_product": "Editar Producto", "title_create_division": "Nueva División", "title_create_department": "Nuevo Departamento", "title_create_project": "Nuevo Proyecto", "title_create_product": "Nuevo Producto", "name": "Nombre", "division": "División", "department": "Departamento", "project": "Proyecto", "version": "Versión", "publishDate": "Fecha de publicación", "description": "Descripción" },
-  "tooltip": { "filters": "Filtros", "close": "Cerrar" }
+  "nav": {
+    "home": "Inicio",
+    "division": "Divisiones",
+    "department": "Departamentos",
+    "project": "Proyectos",
+    "product": "Productos",
+    "language": "Idioma",
+    "brand": "Rayden products index"
+  },
+  "home": {
+    "title": "Rayden Product Index",
+    "subtitle": "Panel de administración",
+    "division": "Divisiones",
+    "division_desc": "Gestiona las divisiones de la organización",
+    "department": "Departamentos",
+    "department_desc": "Administra los departamentos",
+    "project": "Proyectos",
+    "project_desc": "Controla los proyectos activos",
+    "product": "Productos",
+    "product_desc": "Catálogo completo de productos"
+  },
+  "table": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "server_error": "Hay problemas para conectarse al servidor. Por favor, espere a que se resuelva. Disculpen las molestias.",
+    "title_division": "Divisiones",
+    "title_department": "Departamentos",
+    "title_project": "Proyectos",
+    "title_product": "Productos",
+    "col_name": "Nombre",
+    "col_division": "División",
+    "col_department": "Departamento",
+    "col_version": "Versión",
+    "col_date": "Fecha",
+    "col_time": "Hora",
+    "col_description": "Descripción",
+    "col_project": "Proyecto",
+    "selected": "seleccionados",
+    "all": "Todos",
+    "rows_per_page": "Filas por página:",
+    "page": "Página {{current}} de {{total}}",
+    "id_prefix": "ID"
+  },
+  "action": {
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "confirm_delete": "¿Eliminar {{name}}?",
+    "confirm_delete_selected": "¿Eliminar {{count}} elementos?",
+    "deleted": "Eliminado correctamente",
+    "saved": "Guardado correctamente",
+    "error": "Error al guardar",
+    "delete_selected": "Eliminar seleccionados",
+    "confirm": "Confirmar"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Página no encontrada",
+    "back": "Volver al inicio"
+  },
+  "edit": {
+    "title_division": "Editar División",
+    "title_department": "Editar Departamento",
+    "title_project": "Editar Proyecto",
+    "title_product": "Editar Producto",
+    "title_create_division": "Nueva División",
+    "title_create_department": "Nuevo Departamento",
+    "title_create_project": "Nuevo Proyecto",
+    "title_create_product": "Nuevo Producto",
+    "name": "Nombre",
+    "division": "División",
+    "department": "Departamento",
+    "project": "Proyecto",
+    "version": "Versión",
+    "publishDate": "Fecha de publicación",
+    "description": "Descripción",
+    "publishTime": "Hora de publicación"
+  },
+  "tooltip": {
+    "filters": "Filtros",
+    "close": "Cerrar"
+  },
+  "validation": {
+    "required": "{{field}} es obligatorio",
+    "invalidFormat": "Formato no válido"
+  }
 }

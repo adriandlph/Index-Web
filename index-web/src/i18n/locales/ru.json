@@ -1,10 +1,90 @@
 {
   "lang": "RUS",
-  "nav": { "home": "Главная", "division": "Отделы", "department": "Департаменты", "project": "Проекты", "product": "Продукты", "language": "Язык", "brand": "Rayden products index" },
-  "home": { "title": "Rayden Product Index", "subtitle": "Панель управления", "division": "Отделы", "division_desc": "Управление отделами организации", "department": "Департаменты", "department_desc": "Управление департаментами", "project": "Проекты", "project_desc": "Контроль активных проектов", "product": "Продукты", "product_desc": "Полный каталог продуктов" },
-  "table": { "loading": "Загрузка...", "error": "Ошибка", "server_error": "Возникли проблемы с подключением к серверу. Пожалуйста, подождите. Приносим извинения за неудобства.", "title_division": "Отделы", "title_department": "Департаменты", "title_project": "Проекты", "title_product": "Продукты", "col_name": "Имя", "col_division": "Отдел", "col_department": "Департамент", "col_version": "Версия", "col_date": "Дата", "col_time": "Время", "col_description": "Описание", "col_project": "Проект", "selected": "выбрано", "all": "Все", "rows_per_page": "Строк на странице:", "page": "Страница {{current}} из {{total}}", "id_prefix": "ID" },
-  "action": { "edit": "Редактировать", "delete": "Удалить", "cancel": "Отмена", "save": "Сохранить", "confirm_delete": "Удалить {{name}}?", "confirm_delete_selected": "Удалить {{count}} элементов?", "deleted": "Успешно удалено", "saved": "Успешно сохранено", "error": "Ошибка при сохранении", "delete_selected": "Удалить выбранные", "confirm": "Подтвердить" },
-  "notFound": { "title": "404", "message": "Страница не найдена", "back": "Вернуться на главную" },
-  "edit": { "title_division": "Редактировать отдел", "title_department": "Редактировать департамент", "title_project": "Редактировать проект", "title_product": "Редактировать продукт", "title_create_division": "Новый отдел", "title_create_department": "Новый департамент", "title_create_project": "Новый проект", "title_create_product": "Новый продукт", "name": "Имя", "division": "Отдел", "department": "Департамент", "project": "Проект", "version": "Версия", "publishDate": "Дата публикации", "description": "Описание" },
-  "tooltip": { "filters": "Фильтры", "close": "Закрыть" }
+  "nav": {
+    "home": "Главная",
+    "division": "Отделы",
+    "department": "Департаменты",
+    "project": "Проекты",
+    "product": "Продукты",
+    "language": "Язык",
+    "brand": "Rayden products index"
+  },
+  "home": {
+    "title": "Rayden Product Index",
+    "subtitle": "Панель управления",
+    "division": "Отделы",
+    "division_desc": "Управление отделами организации",
+    "department": "Департаменты",
+    "department_desc": "Управление департаментами",
+    "project": "Проекты",
+    "project_desc": "Контроль активных проектов",
+    "product": "Продукты",
+    "product_desc": "Полный каталог продуктов"
+  },
+  "table": {
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "server_error": "Возникли проблемы с подключением к серверу. Пожалуйста, подождите. Приносим извинения за неудобства.",
+    "title_division": "Отделы",
+    "title_department": "Департаменты",
+    "title_project": "Проекты",
+    "title_product": "Продукты",
+    "col_name": "Имя",
+    "col_division": "Отдел",
+    "col_department": "Департамент",
+    "col_version": "Версия",
+    "col_date": "Дата",
+    "col_time": "Время",
+    "col_description": "Описание",
+    "col_project": "Проект",
+    "selected": "выбрано",
+    "all": "Все",
+    "rows_per_page": "Строк на странице:",
+    "page": "Страница {{current}} из {{total}}",
+    "id_prefix": "ID"
+  },
+  "action": {
+    "edit": "Редактировать",
+    "delete": "Удалить",
+    "cancel": "Отмена",
+    "save": "Сохранить",
+    "confirm_delete": "Удалить {{name}}?",
+    "confirm_delete_selected": "Удалить {{count}} элементов?",
+    "deleted": "Успешно удалено",
+    "saved": "Успешно сохранено",
+    "error": "Ошибка при сохранении",
+    "delete_selected": "Удалить выбранные",
+    "confirm": "Подтвердить"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Страница не найдена",
+    "back": "Вернуться на главную"
+  },
+  "edit": {
+    "title_division": "Редактировать отдел",
+    "title_department": "Редактировать департамент",
+    "title_project": "Редактировать проект",
+    "title_product": "Редактировать продукт",
+    "title_create_division": "Новый отдел",
+    "title_create_department": "Новый департамент",
+    "title_create_project": "Новый проект",
+    "title_create_product": "Новый продукт",
+    "name": "Имя",
+    "division": "Отдел",
+    "department": "Департамент",
+    "project": "Проект",
+    "version": "Версия",
+    "publishDate": "Дата публикации",
+    "description": "Описание",
+    "publishTime": "Время публикации"
+  },
+  "tooltip": {
+    "filters": "Фильтры",
+    "close": "Закрыть"
+  },
+  "validation": {
+    "required": "{{field}} обязательно",
+    "invalidFormat": "Неверный формат"
+  }
 }

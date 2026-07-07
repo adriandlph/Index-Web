@@ -49,7 +49,7 @@ function Department() {
         const divMap = new Map(divs.map((d) => [d.id, d.name]))
         setRows(depts.map((d) => ({
           name: d.name,
-          division: divMap.get(d.divisionId) ?? `ID ${d.divisionId}`,
+          division: divMap.get(d.divisionId) ?? `${t('table.id_prefix')} ${d.divisionId}`,
         })))
         fetchApi<PageCountResponse>(`${ENDPOINTS.departments}/pages`, { divisionId: filterDivisionId || null, count: String(pageSize) })
           .then((pages) => setTotalPages(pages.totalPages))
@@ -57,7 +57,7 @@ function Department() {
       })
       .catch((err) => { console.error(err); setError('SERVER_ERROR') })
       .finally(() => setLoading(false))
-  }, [filterDivisionId, page, pageSize])
+  }, [filterDivisionId, page, pageSize, t])
 
   useEffect(loadData, [loadData])
 
@@ -179,12 +179,14 @@ function Department() {
             <EditModal
               title={t('edit.title_department')}
               fields={[
-                { key: 'name', label: t('edit.name'), value: editItem.name },
+                { key: 'name', label: t('edit.name'), value: editItem.name, required: true, placeholder: 'Department name' },
                 {
                   key: 'divisionId',
                   label: t('edit.division'),
                   value: String(editItem.divisionId),
                   searchable: true,
+                  required: true,
+                  placeholder: 'Search division...',
                   options: divisions.map((d) => ({
                     value: String(d.id),
                     label: d.name,
@@ -199,12 +201,14 @@ function Department() {
             <EditModal
               title={t('edit.title_create_department')}
               fields={[
-                { key: 'name', label: t('edit.name'), value: '' },
+                { key: 'name', label: t('edit.name'), value: '', required: true, placeholder: 'Department name' },
                 {
                   key: 'divisionId',
                   label: t('edit.division'),
                   value: '',
                   searchable: true,
+                  required: true,
+                  placeholder: 'Search division...',
                   options: divisions.map((d) => ({
                     value: String(d.id),
                     label: d.name,

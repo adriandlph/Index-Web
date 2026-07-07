@@ -62,10 +62,10 @@ function Product() {
         date,
         time: rawTime ? rawTime.split('.')[0] : '',
         description: p.description,
-        project: projMap.get(p.projectId) ?? `ID ${p.projectId}`,
+        project: projMap.get(p.projectId) ?? `${t('table.id_prefix')} ${p.projectId}`,
       }
     })
-  }, [data, projects, dateFormat])
+  }, [data, projects, dateFormat, t])
 
   const loadData = useCallback(() => {
     const projId = filterProjectId || null
@@ -159,15 +159,18 @@ function Product() {
     setBulkDelete(false)
   }
 
+  function formatDateTime(date: string, time: string): string | null {
+    if (date && time) return `${date}T${time}:00`
+    if (date) return `${date}T00:00:00`
+    return null
+  }
+
   async function handleCreate(values: Record<string, string>) {
     try {
-      const publishDate = values.date && values.time
-        ? `${values.date}T${values.time}`
-        : values.date || new Date().toISOString()
       await postApi(ENDPOINTS.products, {
         name: values.name,
         version: values.version,
-        publishDate,
+        publishDate: formatDateTime(values.date, values.time),
         description: values.description,
         projectId: Number(values.projectId),
       })
@@ -184,13 +187,10 @@ function Product() {
     if (editIndex === null) return
     const item = data[editIndex]
     try {
-      const publishDate = values.date && values.time
-        ? `${values.date}T${values.time}`
-        : values.date || item.publishDate
       await putApi(`${ENDPOINTS.products}/${item.id}`, {
         name: values.name,
         version: values.version,
-        publishDate,
+        publishDate: formatDateTime(values.date, values.time) ?? item.publishDate,
         description: values.description,
         projectId: Number(values.projectId),
       })
@@ -275,32 +275,37 @@ function Product() {
             <EditModal
               title={t('edit.title_product')}
               fields={[
-                { key: 'name', label: t('edit.name'), value: editItem.name },
-                { key: 'version', label: t('edit.version'), value: editItem.version },
+                { key: 'name', label: t('edit.name'), value: editItem.name, required: true, placeholder: 'Product name' },
+                { key: 'version', label: t('edit.version'), value: editItem.version, required: true, pattern: '^v\\d{2}\\.\\d{2}\\.\\d{3}$', patternMessage: 'Version format must be v00.00.000', placeholder: 'v00.00.000' },
                 {
                   key: 'date',
                   label: t('edit.publishDate'),
                   value: editItem.publishDate.includes('T')
                     ? editItem.publishDate.split('T')[0]
                     : editItem.publishDate,
+                  type: 'date',
                 },
                 {
                   key: 'time',
-                  label: t('table.col_time'),
+                  label: t('edit.publishTime'),
                   value: editItem.publishDate.includes('T')
                     ? editItem.publishDate.split('T')[1].split('.')[0]
                     : '',
+                  type: 'time',
                 },
                 {
                   key: 'description',
                   label: t('edit.description'),
                   value: editItem.description,
+                  placeholder: 'Optional',
                 },
                 {
                   key: 'projectId',
                   label: t('edit.project'),
                   value: String(editItem.projectId),
                   searchable: true,
+                  required: true,
+                  placeholder: 'Search project...',
                   options: projects.map((p) => ({
                     value: String(p.id),
                     label: p.name,
@@ -315,16 +320,18 @@ function Product() {
             <EditModal
               title={t('edit.title_create_product')}
               fields={[
-                { key: 'name', label: t('edit.name'), value: '' },
-                { key: 'version', label: t('edit.version'), value: '' },
-                { key: 'date', label: t('edit.publishDate'), value: '' },
-                { key: 'time', label: t('table.col_time'), value: '' },
-                { key: 'description', label: t('edit.description'), value: '' },
+                { key: 'name', label: t('edit.name'), value: '', required: true, placeholder: 'Product name' },
+                { key: 'version', label: t('edit.version'), value: '', required: true, pattern: '^v\\d{2}\\.\\d{2}\\.\\d{3}$', patternMessage: 'Version format must be v00.00.000', placeholder: 'v00.00.000' },
+                { key: 'date', label: t('edit.publishDate'), value: '', type: 'date' },
+                { key: 'time', label: t('edit.publishTime'), value: '', type: 'time' },
+                { key: 'description', label: t('edit.description'), value: '', placeholder: 'Optional' },
                 {
                   key: 'projectId',
                   label: t('edit.project'),
                   value: '',
                   searchable: true,
+                  required: true,
+                  placeholder: 'Search project...',
                   options: projects.map((p) => ({
                     value: String(p.id),
                     label: p.name,

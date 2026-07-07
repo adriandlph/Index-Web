@@ -1,10 +1,90 @@
 {
   "lang": "JPN",
-  "nav": { "home": "ホーム", "division": "部門", "department": "部署", "project": "プロジェクト", "product": "製品", "language": "言語", "brand": "Rayden products index" },
-  "home": { "title": "Rayden Product Index", "subtitle": "管理パネル", "division": "部門", "division_desc": "組織部門を管理", "department": "部署", "department_desc": "部署を管理", "project": "プロジェクト", "project_desc": "アクティブなプロジェクトを管理", "product": "製品", "product_desc": "完全な製品カタログ" },
-  "table": { "loading": "読み込み中...", "error": "エラー", "server_error": "サーバーへの接続に問題があります。解決されるまでお待ちください。ご迷惑をおかけして申し訳ございません。", "title_division": "部門", "title_department": "部署", "title_project": "プロジェクト", "title_product": "製品", "col_name": "名前", "col_division": "部門", "col_department": "部署", "col_version": "バージョン", "col_date": "日付", "col_time": "時間", "col_description": "説明", "col_project": "プロジェクト", "selected": "選択中", "all": "すべて", "rows_per_page": "1ページの行数:", "page": "{{current}} / {{total}} ページ", "id_prefix": "ID" },
-  "action": { "edit": "編集", "delete": "削除", "cancel": "キャンセル", "save": "保存", "confirm_delete": "{{name}}を削除しますか？", "confirm_delete_selected": "{{count}}個の項目を削除しますか？", "deleted": "削除しました", "saved": "保存しました", "error": "保存中にエラーが発生しました", "delete_selected": "選択を削除", "confirm": "確認" },
-  "notFound": { "title": "404", "message": "ページが見つかりません", "back": "ホームに戻る" },
-  "edit": { "title_division": "部門を編集", "title_department": "部署を編集", "title_project": "プロジェクトを編集", "title_product": "製品を編集", "title_create_division": "新規部門", "title_create_department": "新規部署", "title_create_project": "新規プロジェクト", "title_create_product": "新規製品", "name": "名前", "division": "部門", "department": "部署", "project": "プロジェクト", "version": "バージョン", "publishDate": "公開日", "description": "説明" },
-  "tooltip": { "filters": "フィルター", "close": "閉じる" }
+  "nav": {
+    "home": "ホーム",
+    "division": "部門",
+    "department": "部署",
+    "project": "プロジェクト",
+    "product": "製品",
+    "language": "言語",
+    "brand": "Rayden products index"
+  },
+  "home": {
+    "title": "Rayden Product Index",
+    "subtitle": "管理パネル",
+    "division": "部門",
+    "division_desc": "組織部門を管理",
+    "department": "部署",
+    "department_desc": "部署を管理",
+    "project": "プロジェクト",
+    "project_desc": "アクティブなプロジェクトを管理",
+    "product": "製品",
+    "product_desc": "完全な製品カタログ"
+  },
+  "table": {
+    "loading": "読み込み中...",
+    "error": "エラー",
+    "server_error": "サーバーへの接続に問題があります。解決されるまでお待ちください。ご迷惑をおかけして申し訳ございません。",
+    "title_division": "部門",
+    "title_department": "部署",
+    "title_project": "プロジェクト",
+    "title_product": "製品",
+    "col_name": "名前",
+    "col_division": "部門",
+    "col_department": "部署",
+    "col_version": "バージョン",
+    "col_date": "日付",
+    "col_time": "時間",
+    "col_description": "説明",
+    "col_project": "プロジェクト",
+    "selected": "選択中",
+    "all": "すべて",
+    "rows_per_page": "1ページの行数:",
+    "page": "{{current}} / {{total}} ページ",
+    "id_prefix": "ID"
+  },
+  "action": {
+    "edit": "編集",
+    "delete": "削除",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "confirm_delete": "{{name}}を削除しますか？",
+    "confirm_delete_selected": "{{count}}個の項目を削除しますか？",
+    "deleted": "削除しました",
+    "saved": "保存しました",
+    "error": "保存中にエラーが発生しました",
+    "delete_selected": "選択を削除",
+    "confirm": "確認"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "ページが見つかりません",
+    "back": "ホームに戻る"
+  },
+  "edit": {
+    "title_division": "部門を編集",
+    "title_department": "部署を編集",
+    "title_project": "プロジェクトを編集",
+    "title_product": "製品を編集",
+    "title_create_division": "新規部門",
+    "title_create_department": "新規部署",
+    "title_create_project": "新規プロジェクト",
+    "title_create_product": "新規製品",
+    "name": "名前",
+    "division": "部門",
+    "department": "部署",
+    "project": "プロジェクト",
+    "version": "バージョン",
+    "publishDate": "公開日",
+    "description": "説明",
+    "publishTime": "公開時間"
+  },
+  "tooltip": {
+    "filters": "フィルター",
+    "close": "閉じる"
+  },
+  "validation": {
+    "required": "{{field}}は必須です",
+    "invalidFormat": "無効な形式です"
+  }
 }

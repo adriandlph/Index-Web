@@ -54,7 +54,7 @@ function Project() {
         const deptMap = new Map(depts.map((d) => [d.id, d.name]))
         setRows(projs.map((p) => ({
           name: p.name,
-          department: deptMap.get(p.departmentId) ?? `ID ${p.departmentId}`,
+          department: deptMap.get(p.departmentId) ?? `${t('table.id_prefix')} ${p.departmentId}`,
         })))
         fetchApi<PageCountResponse>(`${ENDPOINTS.projects}/pages`, { departmentId: deptId, divisionId: divId, count: String(pageSize) })
           .then((pages) => setTotalPages(pages.totalPages))
@@ -62,7 +62,7 @@ function Project() {
       })
       .catch((err) => { console.error(err); setError('SERVER_ERROR') })
       .finally(() => setLoading(false))
-  }, [filterDivisionId, filterDepartmentId, page, pageSize])
+  }, [filterDivisionId, filterDepartmentId, page, pageSize, t])
 
   useEffect(() => {
     fetchApi<DivisionResponse[]>(ENDPOINTS.divisions)
@@ -213,12 +213,14 @@ function Project() {
             <EditModal
               title={t('edit.title_project')}
               fields={[
-                { key: 'name', label: t('edit.name'), value: editItem.name },
+                { key: 'name', label: t('edit.name'), value: editItem.name, required: true, placeholder: 'Project name' },
                 {
                   key: 'departmentId',
                   label: t('edit.department'),
                   value: String(editItem.departmentId),
                   searchable: true,
+                  required: true,
+                  placeholder: 'Search department...',
                   options: departments.map((d) => ({
                     value: String(d.id),
                     label: d.name,
@@ -233,12 +235,14 @@ function Project() {
             <EditModal
               title={t('edit.title_create_project')}
               fields={[
-                { key: 'name', label: t('edit.name'), value: '' },
+                { key: 'name', label: t('edit.name'), value: '', required: true, placeholder: 'Project name' },
                 {
                   key: 'departmentId',
                   label: t('edit.department'),
                   value: '',
                   searchable: true,
+                  required: true,
+                  placeholder: 'Search department...',
                   options: departments.map((d) => ({
                     value: String(d.id),
                     label: d.name,

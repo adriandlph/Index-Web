@@ -1,10 +1,90 @@
 {
   "lang": "CAT",
-  "nav": { "home": "Inici", "division": "Divisions", "department": "Departaments", "project": "Projectes", "product": "Productes", "language": "Idioma", "brand": "Rayden products index" },
-  "home": { "title": "Rayden Product Index", "subtitle": "Panell d'administració", "division": "Divisions", "division_desc": "Gestiona les divisions de l'organització", "department": "Departaments", "department_desc": "Administra els departaments", "project": "Projectes", "project_desc": "Controla els projectes actius", "product": "Productes", "product_desc": "Catàleg complet de productes" },
-  "table": { "loading": "Carregant...", "error": "Error", "server_error": "Hi ha problemes per connectar-se al servidor. Si us plau, espereu que es resolgui. Disculpeu les molèsties.", "title_division": "Divisions", "title_department": "Departaments", "title_project": "Projectes", "title_product": "Productes", "col_name": "Nom", "col_division": "Divisió", "col_department": "Departament", "col_version": "Versió", "col_date": "Data", "col_time": "Hora", "col_description": "Descripció", "col_project": "Projecte", "selected": "seleccionats", "all": "Tots", "rows_per_page": "Files per pàgina:", "page": "Pàgina {{current}} de {{total}}", "id_prefix": "ID" },
-  "action": { "edit": "Editar", "delete": "Eliminar", "cancel": "Cancel·lar", "save": "Guardar", "confirm_delete": "Eliminar {{name}}?", "confirm_delete_selected": "Eliminar {{count}} elements?", "deleted": "Eliminat correctament", "saved": "Guardat correctament", "error": "Error en guardar", "delete_selected": "Eliminar seleccionats", "confirm": "Confirmar" },
-  "notFound": { "title": "404", "message": "Pàgina no trobada", "back": "Tornar a l'inici" },
-  "edit": { "title_division": "Editar Divisió", "title_department": "Editar Departament", "title_project": "Editar Projecte", "title_product": "Editar Producte", "title_create_division": "Nova Divisió", "title_create_department": "Nou Departament", "title_create_project": "Nou Projecte", "title_create_product": "Nou Producte", "name": "Nom", "division": "Divisió", "department": "Departament", "project": "Projecte", "version": "Versió", "publishDate": "Data de publicació", "description": "Descripció" },
-  "tooltip": { "filters": "Filtres", "close": "Tancar" }
+  "nav": {
+    "home": "Inici",
+    "division": "Divisions",
+    "department": "Departaments",
+    "project": "Projectes",
+    "product": "Productes",
+    "language": "Idioma",
+    "brand": "Rayden products index"
+  },
+  "home": {
+    "title": "Rayden Product Index",
+    "subtitle": "Panell d'administració",
+    "division": "Divisions",
+    "division_desc": "Gestiona les divisions de l'organització",
+    "department": "Departaments",
+    "department_desc": "Administra els departaments",
+    "project": "Projectes",
+    "project_desc": "Controla els projectes actius",
+    "product": "Productes",
+    "product_desc": "Catàleg complet de productes"
+  },
+  "table": {
+    "loading": "Carregant...",
+    "error": "Error",
+    "server_error": "Hi ha problemes per connectar-se al servidor. Si us plau, espereu que es resolgui. Disculpeu les molèsties.",
+    "title_division": "Divisions",
+    "title_department": "Departaments",
+    "title_project": "Projectes",
+    "title_product": "Productes",
+    "col_name": "Nom",
+    "col_division": "Divisió",
+    "col_department": "Departament",
+    "col_version": "Versió",
+    "col_date": "Data",
+    "col_time": "Hora",
+    "col_description": "Descripció",
+    "col_project": "Projecte",
+    "selected": "seleccionats",
+    "all": "Tots",
+    "rows_per_page": "Files per pàgina:",
+    "page": "Pàgina {{current}} de {{total}}",
+    "id_prefix": "ID"
+  },
+  "action": {
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "cancel": "Cancel·lar",
+    "save": "Guardar",
+    "confirm_delete": "Eliminar {{name}}?",
+    "confirm_delete_selected": "Eliminar {{count}} elements?",
+    "deleted": "Eliminat correctament",
+    "saved": "Guardat correctament",
+    "error": "Error en guardar",
+    "delete_selected": "Eliminar seleccionats",
+    "confirm": "Confirmar"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Pàgina no trobada",
+    "back": "Tornar a l'inici"
+  },
+  "edit": {
+    "title_division": "Editar Divisió",
+    "title_department": "Editar Departament",
+    "title_project": "Editar Projecte",
+    "title_product": "Editar Producte",
+    "title_create_division": "Nova Divisió",
+    "title_create_department": "Nou Departament",
+    "title_create_project": "Nou Projecte",
+    "title_create_product": "Nou Producte",
+    "name": "Nom",
+    "division": "Divisió",
+    "department": "Departament",
+    "project": "Projecte",
+    "version": "Versió",
+    "publishDate": "Data de publicació",
+    "description": "Descripció",
+    "publishTime": "Hora de publicació"
+  },
+  "tooltip": {
+    "filters": "Filtres",
+    "close": "Tancar"
+  },
+  "validation": {
+    "required": "{{field}} és obligatori",
+    "invalidFormat": "Format no vàlid"
+  }
 }
