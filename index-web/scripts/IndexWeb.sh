@@ -10,10 +10,11 @@ EOF
 
 echo ""
 echo "  1) Start web"
-echo "  2) Generate SSL certificate"
+echo "  2) Build"
+echo "  3) Generate SSL certificate"
 echo ""
 echo "════════════════════════════════"
-read -p "  Select an option (1-2): " option
+read -p "  Select an option (1-3): " option
 
 case $option in
   1)
@@ -21,6 +22,11 @@ case $option in
     cd "$DIR" && npx vite
     ;;
   2)
+    echo "Running: npm run build"
+    cd "$DIR" && npm run build
+    echo "Build complete. Output in dist/"
+    ;;
+  3)
     echo "Generating SSL certificate..."
     cd "$DIR"
     if [ -f secrets/cert.pem ] && [ -f secrets/key.pem ]; then
