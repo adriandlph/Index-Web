@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react'
 import ContextMenu from './ContextMenu.tsx'
 import Tooltip from './Tooltip.tsx'
@@ -44,6 +45,7 @@ function DataTable<T>({
   onPageSizeChange,
   filterBar,
 }: DataTableProps<T>) {
+  const { t } = useTranslation()
   const [menu, setMenu] = useState<{ x: number; y: number; index: number } | null>(null)
   const [sortKey, setSortKey] = useState<keyof T | null>(null)
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('asc')
@@ -115,7 +117,7 @@ function DataTable<T>({
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold text-white">{title}</h1>
         {filterBar && (
-          <Tooltip text="Filters">
+          <Tooltip text={t('tooltip.filters')} position="bottom">
             <button
               onClick={() => setFilterOpen(!filterOpen)}
               className={`rounded-lg p-2 transition-colors hover:bg-gray-800 ${
@@ -135,7 +137,7 @@ function DataTable<T>({
             {filterBar}
           </div>
           <div className="flex items-center gap-2 text-sm text-gray-400 ml-auto">
-            <span>Rows per page:</span>
+            <span>{t('table.rows_per_page')}</span>
             <Listbox value={pageSize ?? 25} onChange={handlePageSizeChange}>
               <ListboxButton className="flex items-center gap-1 rounded-lg border border-gray-600 bg-gray-800 px-3 py-1.5 text-sm text-gray-200 transition-colors hover:bg-gray-700 focus:outline-none">
                 {pageSize}
@@ -205,7 +207,7 @@ function DataTable<T>({
         <div className="flex items-center justify-between px-4 py-3 text-sm text-gray-400">
           <div />
           <div className="flex items-center gap-3">
-            <span>{`Page ${(page ?? 0) + 1}${totalPages != null ? ` of ${totalPages}` : ''}`}</span>
+            <span>{t('table.page', { current: (page ?? 0) + 1, total: totalPages != null && totalPages > 0 ? totalPages : 1 })}</span>
             <button
               onClick={() => onPageChange(page - 1)}
               disabled={page === 0}

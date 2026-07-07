@@ -15,7 +15,7 @@ function ConfirmDialog({ message, onConfirm, onClose }: ConfirmDialogProps) {
       <DialogBackdrop className="fixed inset-0 bg-black/60" />
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <DialogPanel className="w-full max-w-sm rounded-xl border border-gray-700 bg-gray-900 p-6 shadow-2xl">
-          <DialogTitle className="sr-only">Confirm</DialogTitle>
+          <DialogTitle className="sr-only">{t('action.confirm')}</DialogTitle>
           <p className="text-gray-200 mb-6">{message}</p>
           <div className="flex justify-end gap-3">
             <button

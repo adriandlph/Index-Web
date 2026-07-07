@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import Tooltip from './Tooltip.tsx'
 
 type NotificationProps = {
@@ -8,6 +9,7 @@ type NotificationProps = {
 }
 
 function Notification({ message, type = 'success', onClose }: NotificationProps) {
+  const { t } = useTranslation()
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
@@ -30,7 +32,7 @@ function Notification({ message, type = 'success', onClose }: NotificationProps)
       }`}
     >
       <span className="text-sm font-medium text-white">{message}</span>
-      <Tooltip text="Close">
+      <Tooltip text={t('tooltip.close')}>
         <button onClick={() => { setVisible(false); setTimeout(onClose, 300) }} className="ml-2 text-white/60 hover:text-white">
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
