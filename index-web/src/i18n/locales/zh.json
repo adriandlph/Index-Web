@@ -1,0 +1,10 @@
+{
+  "lang": "CHN",
+  "nav": { "home": "首页", "division": "部门", "department": "部门", "project": "项目", "product": "产品", "language": "语言", "brand": "Rayden products index" },
+  "home": { "title": "Rayden Product Index", "subtitle": "管理面板", "division": "部门", "division_desc": "管理组织部门", "department": "部门", "department_desc": "管理科室", "project": "项目", "project_desc": "控制活跃项目", "product": "产品", "product_desc": "完整产品目录" },
+  "table": { "loading": "加载中...", "error": "错误", "server_error": "连接服务器时出现问题。请等待解决。给您带来不便，敬请谅解。", "title_division": "部门", "title_department": "科室", "title_project": "项目", "title_product": "产品", "col_name": "名称", "col_division": "部门", "col_department": "科室", "col_version": "版本", "col_date": "日期", "col_time": "时间", "col_description": "描述", "col_project": "项目", "selected": "已选", "all": "全部", "rows_per_page": "每页行数:", "page": "第 {{current}} 页，共 {{total}} 页", "id_prefix": "ID" },
+  "action": { "edit": "编辑", "delete": "删除", "cancel": "取消", "save": "保存", "confirm_delete": "删除 {{name}}？", "confirm_delete_selected": "删除 {{count}} 个项目？", "deleted": "删除成功", "saved": "保存成功", "error": "保存时出错", "delete_selected": "删除所选", "confirm": "确认" },
+  "notFound": { "title": "404", "message": "页面未找到", "back": "返回首页" },
+  "edit": { "title_division": "编辑部门", "title_department": "编辑科室", "title_project": "编辑项目", "title_product": "编辑产品", "title_create_division": "新建部门", "title_create_department": "新建科室", "title_create_project": "新建项目", "title_create_product": "新建产品", "name": "名称", "division": "部门", "department": "科室", "project": "项目", "version": "版本", "publishDate": "发布日期", "description": "描述" },
+  "tooltip": { "filters": "筛选", "close": "关闭" }
+}

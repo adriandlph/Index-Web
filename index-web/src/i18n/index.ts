@@ -9,6 +9,12 @@ import ca from './locales/ca.json'
 import gl from './locales/gl.json'
 import sv from './locales/sv.json'
 import eu from './locales/eu.json'
+import pt from './locales/pt.json'
+import zh from './locales/zh.json'
+import ja from './locales/ja.json'
+import ko from './locales/ko.json'
+import ru from './locales/ru.json'
+import hi from './locales/hi.json'
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -21,6 +27,12 @@ i18n.use(initReactI18next).init({
     gl: { translation: gl },
     sv: { translation: sv },
     eu: { translation: eu },
+    pt: { translation: pt },
+    zh: { translation: zh },
+    ja: { translation: ja },
+    ko: { translation: ko },
+    ru: { translation: ru },
+    hi: { translation: hi },
   },
   lng: localStorage.getItem('index-web-lang') ?? 'es',
   fallbackLng: 'es',
