@@ -7,7 +7,7 @@
     "project": "Proiektuak",
     "product": "Produktuak",
     "language": "Hizkuntza",
-    "brand": "Rayden products index"
+    "brand": "Rayden Products Index"
   },
   "home": {
     "title": "Rayden Product Index",
@@ -87,5 +87,8 @@
   "validation": {
     "required": "{{field}} beharrezkoa da",
     "invalidFormat": "Formatu baliogabea"
+  },
+  "footer": {
+    "copyright": "© {{year}} Rayden Advance Systems"
   }
 }

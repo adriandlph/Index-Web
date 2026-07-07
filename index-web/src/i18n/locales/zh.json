@@ -7,7 +7,7 @@
     "project": "项目",
     "product": "产品",
     "language": "语言",
-    "brand": "Rayden products index"
+    "brand": "Rayden Products Index"
   },
   "home": {
     "title": "Rayden Product Index",
@@ -86,5 +86,8 @@
   "validation": {
     "required": "{{field}}是必填的",
     "invalidFormat": "格式无效"
+  },
+  "footer": {
+    "copyright": "© {{year}} Rayden Advance Systems"
   }
 }

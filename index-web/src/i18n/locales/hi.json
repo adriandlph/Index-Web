@@ -7,7 +7,7 @@
     "project": "परियोजनाएँ",
     "product": "उत्पाद",
     "language": "भाषा",
-    "brand": "Rayden products index"
+    "brand": "Rayden Products Index"
   },
   "home": {
     "title": "Rayden Product Index",
@@ -86,5 +86,8 @@
   "validation": {
     "required": "{{field}} आवश्यक है",
     "invalidFormat": "अमान्य प्रारूप"
+  },
+  "footer": {
+    "copyright": "© {{year}} Rayden Advance Systems"
   }
 }

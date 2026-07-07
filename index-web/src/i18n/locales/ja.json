@@ -7,7 +7,7 @@
     "project": "プロジェクト",
     "product": "製品",
     "language": "言語",
-    "brand": "Rayden products index"
+    "brand": "Rayden Products Index"
   },
   "home": {
     "title": "Rayden Product Index",
@@ -86,5 +86,8 @@
   "validation": {
     "required": "{{field}}は必須です",
     "invalidFormat": "無効な形式です"
+  },
+  "footer": {
+    "copyright": "© {{year}} Rayden Advance Systems"
   }
 }
