@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useMemo } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
 import type { ProductResponse, ProjectResponse, DepartmentResponse, DivisionResponse, ProductRow, PageCountResponse } from '../types.ts'
@@ -25,6 +26,7 @@ const columns = (t: TFunction) => [
 
 function Product() {
   const { t } = useTranslation()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [data, setData] = useState<ProductResponse[]>([])
   const [projects, setProjects] = useState<ProjectResponse[]>([])
   const [loading, setLoading] = useState(true)
@@ -40,9 +42,9 @@ function Product() {
   const [deleteIndex, setDeleteIndex] = useState<number | null>(null)
   const [bulkDelete, setBulkDelete] = useState(false)
   const [dateFormat, setDateFormat] = useState<'DD-MM-YYYY' | 'YYYY-MM-DD'>('DD-MM-YYYY')
-  const [filterDivisionId, setFilterDivisionId] = useState('')
-  const [filterDepartmentId, setFilterDepartmentId] = useState('')
-  const [filterProjectId, setFilterProjectId] = useState('')
+  const [filterDivisionId, setFilterDivisionId] = useState(searchParams.get('divisionId') ?? '')
+  const [filterDepartmentId, setFilterDepartmentId] = useState(searchParams.get('departmentId') ?? '')
+  const [filterProjectId, setFilterProjectId] = useState(searchParams.get('projectId') ?? '')
   const [allDivisions, setAllDivisions] = useState<DivisionResponse[]>([])
   const [filterDepartments, setFilterDepartments] = useState<DepartmentResponse[]>([])
   const [filterProjects, setFilterProjects] = useState<ProjectResponse[]>([])
@@ -112,12 +114,19 @@ function Product() {
     setFilterDepartmentId('')
     setFilterProjectId('')
     setPage(0)
+    const params: Record<string, string> = {}
+    if (id) params.divisionId = id
+    setSearchParams(params, { replace: true })
   }
 
   function handleDepartmentChange(id: string) {
     setFilterDepartmentId(id)
     setFilterProjectId('')
     setPage(0)
+    const params: Record<string, string> = {}
+    if (filterDivisionId) params.divisionId = filterDivisionId
+    if (id) params.departmentId = id
+    setSearchParams(params, { replace: true })
   }
 
   useEffect(loadData, [loadData])
@@ -256,7 +265,15 @@ function Product() {
                     label={t('edit.project')}
                     options={[{ value: '', label: t('table.all') }, ...filterProjects.map((p) => ({ value: String(p.id), label: p.name }))]}
                     value={filterProjectId}
-                    onChange={(id) => { setFilterProjectId(id); setPage(0) }}
+                    onChange={(id) => {
+                      setFilterProjectId(id)
+                      setPage(0)
+                      const params: Record<string, string> = {}
+                      if (filterDivisionId) params.divisionId = filterDivisionId
+                      if (filterDepartmentId) params.departmentId = filterDepartmentId
+                      if (id) params.projectId = id
+                      setSearchParams(params, { replace: true })
+                    }}
                   />
                 )}
               </>

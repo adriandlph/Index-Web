@@ -1,9 +1,11 @@
 import { useEffect, useState, useCallback } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
 import type { ProjectResponse, DepartmentResponse, DivisionResponse, ProjectRow, PageCountResponse } from '../types.ts'
 import { fetchApi, postApi, putApi, deleteApi } from '../services/api.ts'
 import { ENDPOINTS } from '../config/api.ts'
+import { ROUTES } from '../config/routes.ts'
 import DataTable from '../components/DataTable.tsx'
 import EditModal from '../components/EditModal.tsx'
 import Loading from '../components/Loading.tsx'
@@ -21,6 +23,8 @@ const columns = (t: TFunction) => [
 
 function Project() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [data, setData] = useState<ProjectResponse[]>([])
   const [rows, setRows] = useState<ProjectRow[]>([])
   const [departments, setDepartments] = useState<DepartmentResponse[]>([])
@@ -36,8 +40,8 @@ function Project() {
   const [notifType, setNotifType] = useState<'success' | 'error'>('success')
   const [deleteIndex, setDeleteIndex] = useState<number | null>(null)
   const [bulkDelete, setBulkDelete] = useState(false)
-  const [filterDivisionId, setFilterDivisionId] = useState('')
-  const [filterDepartmentId, setFilterDepartmentId] = useState('')
+  const [filterDivisionId, setFilterDivisionId] = useState(searchParams.get('divisionId') ?? '')
+  const [filterDepartmentId, setFilterDepartmentId] = useState(searchParams.get('departmentId') ?? '')
   const [allDivisions, setAllDivisions] = useState<DivisionResponse[]>([])
   const [filterDepartments, setFilterDepartments] = useState<DepartmentResponse[]>([])
 
@@ -81,6 +85,9 @@ function Project() {
     setFilterDivisionId(id)
     setFilterDepartmentId('')
     setPage(0)
+    const params: Record<string, string> = {}
+    if (id) params.divisionId = id
+    setSearchParams(params, { replace: true })
   }
 
   useEffect(loadData, [loadData])
@@ -173,6 +180,7 @@ function Project() {
             data={rows}
             onEdit={(i) => setEditIndex(i)}
             onDelete={handleDelete}
+            onRowDoubleClick={(i) => navigate(`${ROUTES.product}?projectId=${data[i].id}`)}
             selectedIndices={selectedIndices}
             onSelectionChange={setSelectedIndices}
             page={page}
@@ -193,7 +201,14 @@ function Project() {
                     label={t('edit.department')}
                     options={[{ value: '', label: t('table.all') }, ...filterDepartments.map((d) => ({ value: String(d.id), label: d.name }))]}
                     value={filterDepartmentId}
-                    onChange={(id) => { setFilterDepartmentId(id); setPage(0) }}
+                    onChange={(id) => {
+                      setFilterDepartmentId(id)
+                      setPage(0)
+                      const params: Record<string, string> = {}
+                      if (filterDivisionId) params.divisionId = filterDivisionId
+                      if (id) params.departmentId = id
+                      setSearchParams(params, { replace: true })
+                    }}
                   />
                 )}
               </>

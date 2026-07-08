@@ -17,6 +17,7 @@ type DataTableProps<T> = {
   onEdit?: (index: number) => void
   onDelete?: (index: number) => void
   onHeaderContext?: (key: keyof T, e: React.MouseEvent) => void
+  onRowDoubleClick?: (index: number) => void
   selectedIndices?: Set<number>
   onSelectionChange?: (indices: Set<number>) => void
   page?: number
@@ -38,6 +39,7 @@ function DataTable<T>({
   onHeaderContext,
   selectedIndices,
   onSelectionChange,
+  onRowDoubleClick,
   page,
   pageSize,
   totalPages,
@@ -188,10 +190,11 @@ function DataTable<T>({
               </tr>
             ) : (
               sorted.map(({ item, index }) => (
-                <tr
-                  key={index}
-                  onClick={(e) => handleRowClick(e, index)}
-                  onContextMenu={(e) => handleContext(e, index)}
+                  <tr
+                    key={index}
+                    onClick={(e) => handleRowClick(e, index)}
+                    onDoubleClick={() => onRowDoubleClick?.(index)}
+                    onContextMenu={(e) => handleContext(e, index)}
                   className={`border-b border-gray-700 transition-colors cursor-pointer ${
                     menu?.index === index
                       ? 'bg-indigo-800/40'

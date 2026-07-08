@@ -1,9 +1,11 @@
 import { useEffect, useState, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
 import type { DivisionResponse, DivisionRow, PageCountResponse } from '../types.ts'
 import { fetchApi, postApi, putApi, deleteApi } from '../services/api.ts'
 import { ENDPOINTS } from '../config/api.ts'
+import { ROUTES } from '../config/routes.ts'
 import DataTable from '../components/DataTable.tsx'
 import EditModal from '../components/EditModal.tsx'
 import Loading from '../components/Loading.tsx'
@@ -19,6 +21,7 @@ const columns = (t: TFunction) => [
 
 function Division() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const [data, setData] = useState<DivisionResponse[]>([])
   const [rows, setRows] = useState<DivisionRow[]>([])
   const [loading, setLoading] = useState(true)
@@ -131,6 +134,7 @@ function Division() {
             data={rows}
             onEdit={(i) => setEditIndex(i)}
             onDelete={handleDelete}
+            onRowDoubleClick={(i) => navigate(`${ROUTES.department}?divisionId=${data[i].id}`)}
             selectedIndices={selectedIndices}
             onSelectionChange={setSelectedIndices}
             page={page}

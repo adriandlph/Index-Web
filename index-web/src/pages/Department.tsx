@@ -1,9 +1,11 @@
 import { useEffect, useState, useCallback } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
 import type { DepartmentResponse, DivisionResponse, DepartmentRow, PageCountResponse } from '../types.ts'
 import { fetchApi, postApi, putApi, deleteApi } from '../services/api.ts'
 import { ENDPOINTS } from '../config/api.ts'
+import { ROUTES } from '../config/routes.ts'
 import DataTable from '../components/DataTable.tsx'
 import EditModal from '../components/EditModal.tsx'
 import Loading from '../components/Loading.tsx'
@@ -21,6 +23,8 @@ const columns = (t: TFunction) => [
 
 function Department() {
   const { t } = useTranslation()
+  const navigate = useNavigate()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [data, setData] = useState<DepartmentResponse[]>([])
   const [rows, setRows] = useState<DepartmentRow[]>([])
   const [divisions, setDivisions] = useState<DivisionResponse[]>([])
@@ -36,7 +40,7 @@ function Department() {
   const [notifType, setNotifType] = useState<'success' | 'error'>('success')
   const [deleteIndex, setDeleteIndex] = useState<number | null>(null)
   const [bulkDelete, setBulkDelete] = useState(false)
-  const [filterDivisionId, setFilterDivisionId] = useState('')
+  const [filterDivisionId, setFilterDivisionId] = useState(searchParams.get('divisionId') ?? '')
 
   const loadData = useCallback(() => {
     Promise.all([
@@ -149,6 +153,7 @@ function Department() {
             data={rows}
             onEdit={(i) => setEditIndex(i)}
             onDelete={handleDelete}
+            onRowDoubleClick={(i) => navigate(`${ROUTES.project}?divisionId=${data[i].divisionId}&departmentId=${data[i].id}`)}
             selectedIndices={selectedIndices}
             onSelectionChange={setSelectedIndices}
             page={page}
@@ -161,7 +166,7 @@ function Department() {
                 label={t('edit.division')}
                 options={[{ value: '', label: t('table.all') }, ...divisions.map((d) => ({ value: String(d.id), label: d.name }))]}
                 value={filterDivisionId}
-                onChange={(id) => { setFilterDivisionId(id); setPage(0) }}
+                onChange={(id) => { setFilterDivisionId(id); setPage(0); setSearchParams(id ? { divisionId: id } : {}, { replace: true }) }}
               />
             }
           />
