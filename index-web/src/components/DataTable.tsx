@@ -247,6 +247,7 @@ function DataTable<T>({
           onEdit={onEdit ? () => onEdit(menu.index) : () => {}}
           onDelete={onDelete ? () => onDelete(menu.index) : () => {}}
           onClose={() => setMenu(null)}
+          showEdit={!selectedIndices || selectedIndices.size <= 1}
         />
       )}
     </div>

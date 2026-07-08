@@ -298,15 +298,15 @@ function Product() {
                 {
                   key: 'date',
                   label: t('edit.publishDate'),
-                  value: editItem.publishDate.includes('T')
+                  value: (editItem.publishDate ?? '').includes('T')
                     ? editItem.publishDate.split('T')[0]
-                    : editItem.publishDate,
+                    : editItem.publishDate ?? '',
                   type: 'date',
                 },
                 {
                   key: 'time',
                   label: t('edit.publishTime'),
-                  value: editItem.publishDate.includes('T')
+                  value: (editItem.publishDate ?? '').includes('T')
                     ? editItem.publishDate.split('T')[1].split('.')[0]
                     : '',
                   type: 'time',
