@@ -2,6 +2,10 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import fs from 'fs'
+import http from 'http'
+
+const HTTPS_PORT = 5173
+const HTTP_PORT = 5172
 
 const httpsConfig = (() => {
   try {
@@ -15,9 +19,27 @@ const httpsConfig = (() => {
   }
 })()
 
+function httpRedirectPlugin(): import('vite').Plugin {
+  let started = false
+  return {
+    name: 'http-redirect',
+    configureServer() {
+      if (started) return
+      started = true
+      http.createServer((req, res) => {
+        const host = req.headers.host?.split(':')[0] || 'localhost'
+        res.writeHead(301, { Location: `https://${host}:${HTTPS_PORT}${req.url}` })
+        res.end()
+      }).listen(HTTP_PORT, () => {
+        console.log(`  ➜  HTTP:   http://localhost:${HTTP_PORT}/ (redirects to HTTPS)`)
+      })
+    },
+  }
+}
+
 export default defineConfig({
   base: '/',
-  plugins: [tailwindcss(), react()],
+  plugins: [tailwindcss(), react(), httpRedirectPlugin()],
   build: {
     rollupOptions: {
       output: {
@@ -30,6 +52,7 @@ export default defineConfig({
     },
   },
   server: {
+    port: HTTPS_PORT,
     https: httpsConfig,
     proxy: {
       '/api': {

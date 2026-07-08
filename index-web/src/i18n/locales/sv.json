@@ -41,7 +41,8 @@
     "all": "Alla",
     "rows_per_page": "Rader per sida:",
     "page": "Sida {{current}} av {{total}}",
-    "id_prefix": "ID"
+    "id_prefix": "ID",
+    "no_data": "Ingen data tillgänglig"
   },
   "action": {
     "edit": "Redigera",

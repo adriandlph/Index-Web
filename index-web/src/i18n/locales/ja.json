@@ -41,7 +41,8 @@
     "all": "すべて",
     "rows_per_page": "1ページの行数:",
     "page": "{{current}} / {{total}} ページ",
-    "id_prefix": "ID"
+    "id_prefix": "ID",
+    "no_data": "データがありません"
   },
   "action": {
     "edit": "編集",

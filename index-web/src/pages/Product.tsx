@@ -50,9 +50,10 @@ function Product() {
   const rows = useMemo(() => {
     const projMap = new Map(projects.map((p) => [p.id, p.name]))
     return data.map((p) => {
-      const [rawDate, rawTime] = p.publishDate.includes('T')
-        ? p.publishDate.split('T')
-        : [p.publishDate, '']
+      const publishDate = p.publishDate ?? ''
+      const [rawDate, rawTime] = publishDate.includes('T')
+        ? publishDate.split('T')
+        : [publishDate, '']
       const date = dateFormat === 'DD-MM-YYYY' && rawDate
         ? rawDate.split('-').reverse().join('-')
         : rawDate

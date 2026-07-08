@@ -41,7 +41,8 @@
     "all": "Alle",
     "rows_per_page": "Zeilen pro Seite:",
     "page": "Seite {{current}} von {{total}}",
-    "id_prefix": "ID"
+    "id_prefix": "ID",
+    "no_data": "Keine Daten verfügbar"
   },
   "action": {
     "edit": "Bearbeiten",

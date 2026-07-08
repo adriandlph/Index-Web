@@ -41,7 +41,8 @@ case $option in
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
       -keyout secrets/key.pem \
       -out secrets/cert.pem \
-      -subj "/CN=localhost/O=Index-Web/C=NA" 2>/dev/null
+      -subj "/CN=localhost/O=Index-Web/C=NA" \
+      -addext "subjectAltName=DNS:localhost,IP:127.0.0.1" 2>/dev/null
     echo "Certificate generated at secrets/cert.pem"
     echo "Key generated at secrets/key.pem"
     ;;

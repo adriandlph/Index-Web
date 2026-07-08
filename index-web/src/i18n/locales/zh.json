@@ -41,7 +41,8 @@
     "all": "全部",
     "rows_per_page": "每页行数:",
     "page": "第 {{current}} 页，共 {{total}} 页",
-    "id_prefix": "ID"
+    "id_prefix": "ID",
+    "no_data": "暂无可用数据"
   },
   "action": {
     "edit": "编辑",

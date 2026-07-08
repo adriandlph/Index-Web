@@ -41,7 +41,8 @@
     "all": "Guztiak",
     "rows_per_page": "Orrialdeko errenkadak:",
     "page": "Orrialdea {{current}} / {{total}}",
-    "id_prefix": "ID"
+    "id_prefix": "ID",
+    "no_data": "Ez dago datu erabilgarririk"
   },
   "action": {
     "edit": "Editatu",

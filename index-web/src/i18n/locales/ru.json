@@ -41,7 +41,8 @@
     "all": "Все",
     "rows_per_page": "Строк на странице:",
     "page": "Страница {{current}} из {{total}}",
-    "id_prefix": "ID"
+    "id_prefix": "ID",
+    "no_data": "Нет доступных данных"
   },
   "action": {
     "edit": "Редактировать",

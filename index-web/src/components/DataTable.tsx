@@ -180,26 +180,34 @@ function DataTable<T>({
             </tr>
           </thead>
           <tbody>
-            {sorted.map(({ item, index }) => (
-              <tr
-                key={index}
-                onClick={(e) => handleRowClick(e, index)}
-                onContextMenu={(e) => handleContext(e, index)}
-                className={`border-b border-gray-700 transition-colors cursor-pointer ${
-                  menu?.index === index
-                    ? 'bg-indigo-800/40'
-                    : selectedIndices?.has(index)
-                      ? 'bg-indigo-900/30 hover:bg-indigo-900/40'
-                      : 'hover:bg-gray-700'
-                }`}
-              >
-                {columns.map((col) => (
-                  <td key={String(col.key)} className="px-4 py-3">
-                    {String(item[col.key] ?? '')}
-                  </td>
-                ))}
+            {sorted.length === 0 ? (
+              <tr>
+                <td colSpan={columns.length} className="px-4 py-12 text-center text-gray-500">
+                  {t('table.no_data')}
+                </td>
               </tr>
-            ))}
+            ) : (
+              sorted.map(({ item, index }) => (
+                <tr
+                  key={index}
+                  onClick={(e) => handleRowClick(e, index)}
+                  onContextMenu={(e) => handleContext(e, index)}
+                  className={`border-b border-gray-700 transition-colors cursor-pointer ${
+                    menu?.index === index
+                      ? 'bg-indigo-800/40'
+                      : selectedIndices?.has(index)
+                        ? 'bg-indigo-900/30 hover:bg-indigo-900/40'
+                        : 'hover:bg-gray-700'
+                  }`}
+                >
+                  {columns.map((col) => (
+                    <td key={String(col.key)} className="px-4 py-3">
+                      {String(item[col.key] ?? '')}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

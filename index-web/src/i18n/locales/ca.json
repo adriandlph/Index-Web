@@ -41,7 +41,8 @@
     "all": "Tots",
     "rows_per_page": "Files per pàgina:",
     "page": "Pàgina {{current}} de {{total}}",
-    "id_prefix": "ID"
+    "id_prefix": "ID",
+    "no_data": "No hi ha dades disponibles"
   },
   "action": {
     "edit": "Editar",

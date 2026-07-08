@@ -41,7 +41,8 @@
     "all": "Tutti",
     "rows_per_page": "Righe per pagina:",
     "page": "Pagina {{current}} di {{total}}",
-    "id_prefix": "ID"
+    "id_prefix": "ID",
+    "no_data": "Nessun dato disponibile"
   },
   "action": {
     "edit": "Modifica",

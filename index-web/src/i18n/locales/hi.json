@@ -41,7 +41,8 @@
     "all": "सभी",
     "rows_per_page": "प्रति पृष्ठ पंक्तियाँ:",
     "page": "पृष्ठ {{current}} का {{total}}",
-    "id_prefix": "ID"
+    "id_prefix": "ID",
+    "no_data": "कोई डेटा उपलब्ध नहीं है"
   },
   "action": {
     "edit": "संपादित करें",

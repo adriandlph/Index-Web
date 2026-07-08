@@ -41,7 +41,8 @@
     "all": "전체",
     "rows_per_page": "페이지당 행:",
     "page": "{{current}} / {{total}} 페이지",
-    "id_prefix": "ID"
+    "id_prefix": "ID",
+    "no_data": "사용 가능한 데이터가 없습니다"
   },
   "action": {
     "edit": "편집",
